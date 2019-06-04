@@ -21,6 +21,7 @@ const DateBar = ({currentDate, changeDateAct}) => {
   const changeDate = (value) => {
     const milliseconds = new Date(currentDate).getTime() + DAY_TO_MILLISECONDS * value;
     const newDate = new Date(milliseconds).toString().split(' ').splice(0, 4).join(' ');
+    console.log(newDate);
     changeDateAct(newDate);
   };
 

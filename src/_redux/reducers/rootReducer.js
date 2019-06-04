@@ -1,98 +1,94 @@
 const initState = {
-  data: {
-    'Sat Jun 01 2019': [
-      {
-        'name': 'reading in english',
-        'toDo': [0,1,5,6,7],
-        'done': [0,1,5,6,7],
-        'color': '#ff0000',
-        'popular': false
-      },
-      {
-        'name': 'conversation in english',
-        'toDo': [20,21,25,26,27],
-        'done': [20,21,25,26,27],
-        'color': '#00ff00',
-        'popular': false
-      },
-      {
-        'name': 'creating react application',
-        'toDo': [30,31,35,36,37],
-        'done': [30,31,35,36,37],
-        'color': '#0000ff',
-        'popular': false
-      },
-      {
-        'name': 'Resting and relaxing',
-        'toDo': [40,51,65],
-        'done': [40,51,65],
-        'color': '#ff00ff',
-        'popular': true
-      },
-      {
-        'name': 'physical training',
-        'toDo': [66,67,68,69],
-        'done': [66,67,68,69],
-        'color': '#00ffff',
-        'popular': true
+  tasks: [
+    {
+      'name': 'reading in english',
+      'description': '',
+      'status': '',
+      'color': '#ff0000',
+      'popular': false,
+      'date': {
+        'Sun Jun 02 2019': {
+          'toDo': [0,1,5,6,7],
+          'done': [0,1,5,6,7]
+        },
+        'Mon Jun 03 2019': {
+          'toDo': [6,7],
+          'done': [6,7]
+        },
+        'Tue Jun 04 2019': {
+          'toDo': [5,6,7],
+          'done': [5,6,7]
+        }
       }
-    ],
-    'Sun Jun 02 2019': [
-      {
-        'name': 'reading in english',
-        'toDo': [0,1,5,6,7],
-        'done': [0,1,5,6,7],
-        'color': '#ff0000',
-        'popular': false
-      },
-      {
-        'name': 'conversation in english',
-        'toDo': [20,21,25,26,27],
-        'done': [20,21,25,26,27],
-        'color': '#00ff00',
-        'popular': false
-      },
-      {
-        'name': 'creating react application',
-        'toDo': [30,31,35,36,37],
-        'done': [30,31,35,36,37],
-        'color': '#0000ff',
-        'popular': false
-      },
-    ],
-    'Mon Jun 03 2019': [
-      {
-        'name': 'Resting and relaxing',
-        'toDo': [40,51,65],
-        'done': [40,51,65],
-        'color': '#ff00ff',
-        'popular': true
-      },
-      {
-        'name': 'physical training',
-        'toDo': [66,67,68,69],
-        'done': [66,67,68,69],
-        'color': '#00ffff',
-        'popular': true
+    },
+    {
+      'name': 'conversation in english',
+      'description': '',
+      'status': '',
+      'color': '#00ff00',
+      'popular': false,
+      'date': {
+        'Sun Jun 02 2019': {
+          'toDo': [20,21,25,26,27],
+          'done': [20,21,25,26,27]
+        },
+        'Mon Jun 03 2019': {
+          'toDo': [26,27],
+          'done': [26,27]
+        },
+        'Tue Jun 04 2019': {
+          'toDo': [25,26,27],
+          'done': [25,26,27]
+        }
       }
-    ]
-  },
+    },
+    {
+      'name': 'creating react application',
+      'description': '',
+      'status': '',
+      'color': '#0000ff',
+      'popular': false,
+      'date': {
+        'Sun Jun 02 2019': {
+          'toDo': [30,31,35,36,37],
+          'done': [30,31,35,36,37]
+        },
+        'Mon Jun 03 2019': {
+          'toDo': [36,37],
+          'done': [36,37]
+        },
+        'Tue Jun 04 2019': {
+          'toDo': [35,36,37],
+          'done': [35,36,37]
+        }
+      }
+    },
+    {
+      'name': 'Resting and relaxing',
+      'color': '#ff00ff',
+      'popular': true,
+      'date': {}
+    },
+    {
+      'name': 'physical training',
+      'color': '#00ffff',
+      'popular': true,
+      'date': {}
+    }
+  ],
+  currentTaskName: '',
   currentDate: new Date().toString().split(' ').splice(0, 4).join(' '),
-  currentTaskName: 'reading in english',
   modalStatus: 'closed',
   editedTaskName: '',
-};
 
-initState.tasks = initState.data[initState.currentDate];
+};
 
 const rootReducer = (state = initState, action) => {
   switch(action.type) {
-
     case 'CHANGE_DATE':
       return {
         ...state,
-        currentDate: action.payload,
-        tasks: state.data[action.payload] ? state.data[action.payload] : []
+        currentDate: action.payload
       };
       break;
     case 'SAVE_EDITED_TASK':

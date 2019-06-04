@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import Button from '../../atoms/button/button';
 import ColorSampler from '../../atoms/colorSampler/colorSampler';
 import Label from '../../atoms/label/label';
+import Input from '../../atoms/input/input';
 
 import saveEditedTaskAct from '../../../_redux/actions/saveEditedTaskAct';
 import createTaskAct from '../../../_redux/actions/createTaskAct';
@@ -13,10 +14,11 @@ import setModalStatusAct from '../../../_redux/actions/setModalStatusAct';
 
 const TASK_MODEL = {
   'name': '',
-  'toDo': [],
-  'done': [],
   'color': '#ff0000',
-  'popular': false
+  'popular': false,
+  'description': '',
+  'status': '',
+  'date': {}
 };
 
 const StyledModalWrapper = styled.div`
@@ -31,6 +33,14 @@ const StyledModalWrapper = styled.div`
   justify-content: center;
 `;
 
+const StyledRow = styled.div`
+  padding-bottom: 15px;
+`;
+
+const StyledLabel = styled(Label)`
+  padding: 0 0 5px 8px;
+`;
+
 const StyledModalBody = styled.div`
   position: relative;
   align-self: flex-start;
@@ -40,6 +50,7 @@ const StyledModalBody = styled.div`
   padding: 35px 35px 25px 35px;
   background: ${({theme}) => theme.color.white};
 `;
+
 
 const StyledTextArea = styled.textarea`
   width: 100%;
@@ -61,7 +72,8 @@ class Modal extends React.Component {
 
   state = {
     color: this.props.editedTask ? this.props.editedTask.color : '#ff0000',
-    topicName: this.props.editedTask ? this.props.editedTask.name : 'new task'
+    topicName: this.props.editedTask ? this.props.editedTask.name : 'new task',
+    topicDescription: this.props.editedTask ? this.props.editedTask.description : ''
   };
 
   close = (e) => {
@@ -73,10 +85,11 @@ class Modal extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const {modalStatus, editedTask, saveEditedTaskAct, createTaskAct} = this.props;
+    const {topicName, topicDescription, color} = this.state;
     if(modalStatus === 'edit') {
-      saveEditedTaskAct({...editedTask, name: this.state.topicName, color: this.state.color});
+      saveEditedTaskAct({...editedTask, name: topicName, description: topicDescription, color: color});
     } else if (modalStatus === 'creat') {
-      createTaskAct({...TASK_MODEL, name: this.state.topicName, color: this.state.color});
+      createTaskAct({...TASK_MODEL, name: topicName, description: topicDescription, color: color});
     }
   };
 
@@ -88,17 +101,24 @@ class Modal extends React.Component {
 
   updateTaskName = (e) => {
     this.setState({
-      topicName: e.target.value,
+      [e.target.id]: e.target.value,
     });
   };
 
   render() {
-    const {topicName, color} = this.state;
+    const {topicName, topicDescription, color} = this.state;
     return (
       <StyledModalWrapper onClick={this.close} id="modal-wrapper">
         <StyledModalBody>
           <form onSubmit={this.handleSubmit}>
-            <StyledTextArea onChange={this.updateTaskName} value={topicName}/>
+            <StyledRow>
+              <StyledLabel htmlFor="topicName">Topic name</StyledLabel>
+              <Input id="topicName" onChange={this.updateTaskName} value={topicName}/>
+            </StyledRow>
+            <StyledRow>
+              <StyledLabel htmlFor="topicDescription">Topic description</StyledLabel>
+              <StyledTextArea id="topicDescription" onChange={this.updateTaskName} value={topicDescription}/>
+            </StyledRow>
             <StyledActionSection>
               <Label color={color} htmlFor="colorSampler">Choose color</Label>
               <StyledColorSampler id="colorSampler" color={color} name={topicName} handlerChange={this.updateColor}/>

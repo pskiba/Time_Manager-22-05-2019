@@ -57,10 +57,11 @@ class TimeBar extends React.Component {
   };
 
   getQuarter = (index) => {
-    const {tasks, type} = this.props;
+    const {tasks, type, currentDate} = this.props;
     for(let i = 0; i < tasks.length; i++) {
       let task = tasks[i];
-      if(task[type].indexOf(index) > -1) {
+      let taskDate = task.date[currentDate];
+      if(taskDate && taskDate[type] && taskDate[type].indexOf(index) > -1) {
         return {name: task.name, color: task.color}
       }
     }
@@ -76,26 +77,35 @@ class TimeBar extends React.Component {
   };
 
   handleClick = (quarter) => {
-    const {currentTaskName, type, tasks, updateTasksAct} = this.props;
+    const {currentTaskName, type, tasks, updateTasksAct, currentDate} = this.props;
+    if(!currentTaskName) return;
+
     const currentTask = tasks.find((item) => item.name === currentTaskName);
-    const positions = currentTask[type];
+
+    if(!currentTask.date[currentDate]) {
+      currentTask.date[currentDate] = {
+        'toDo': [],
+        'done': []
+      }
+    }
+    const positions = currentTask.date[currentDate][type];
     let data = {};
 
     data.currentTask = {...currentTask};
 
     if(quarter.name === currentTask.name) {
 
-      data.currentTask[type] = positions.filter((item) => item !== quarter.position);
+      data.currentTask.date[currentDate][type] = positions.filter((item) => item !== quarter.position);
 
     } else if(quarter.name === 'empty') {
 
-      data.currentTask[type].push(quarter.position);
+      data.currentTask.date[currentDate][type].push(quarter.position);
 
     } else {
 
-      data.currentTask[type].push(quarter.position);
+      data.currentTask.date[currentDate][type].push(quarter.position);
       data.previousTask = tasks.find((task) => task.name === quarter.name);
-      data.previousTask[type] = data.previousTask[type].filter((item) => item !== quarter.position);
+      data.previousTask.date[currentDate][type] = data.previousTask.date[currentDate][type].filter((item) => item !== quarter.position);
     }
 
     updateTasksAct(data);
@@ -133,7 +143,8 @@ class TimeBar extends React.Component {
 const mapStateToProps = (state) => {
   return {
     tasks: state.tasks,
-    currentTaskName: state.currentTaskName
+    currentTaskName: state.currentTaskName,
+    currentDate: state.currentDate
   }
 };
 

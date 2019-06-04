@@ -42,8 +42,11 @@ const Sidebar = () => {
             <NavLink to={routes.statistics} activeclass="active">Statistics</NavLink>
           </NavItem>
           <NavItem>
-            <NavLink to={routes.logOut} activeclass="active">Log out</NavLink>
+            <NavLink to={routes.logIn} activeclass="active">Log in</NavLink>
           </NavItem>
+          {/*<NavItem>*/}
+          {/*  <NavLink to={routes.logOut} activeclass="active">Log out</NavLink>*/}
+          {/*</NavItem>*/}
         </StyledNavList>
       </nav>
     </StyledWrapper>

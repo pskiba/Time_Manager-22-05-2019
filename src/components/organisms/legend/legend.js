@@ -41,7 +41,10 @@ const Legend = ({tasks, currentTaskName, chooseTaskAct, updateTaskColorAct}) => 
 
 const mapStateToProps = (state) => {
   return {
-    tasks: state.tasks.filter((item) => item.toDo.length || item.done.length),
+    tasks: state.tasks.filter((item) => {
+        const date = item.date[state.currentDate];
+        return date && (date.toDo || date.done);
+      }),
     currentTaskName: state.currentTaskName
   }
 };
