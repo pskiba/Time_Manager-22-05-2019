@@ -27,15 +27,15 @@ const StyledButtonsWrapper = styled.div`
   display: flex;
 `;
 
-const TaskItem = ({children, color, type, selectTask, updateTaskColor}) => {
+const TaskItem = ({task, type, selectTask, updateTaskColor}) => {
 
   return (
-    <StyledWrapper onClick={() => selectTask(children)}>
-      <ColorPicker color={color} name={children} handlerChange={updateTaskColor}/>
-      <TaskDescription>{children}</TaskDescription>
+    <StyledWrapper onClick={() => selectTask(task._id)}>
+      <ColorPicker color={task.color} _id={task._id} handlerChange={updateTaskColor}/>
+      <TaskDescription>{task.name}</TaskDescription>
       <StyledButtonsWrapper>
         {
-          TYPE_KEYS[type].map((item) => <FunctionButton type={item} name={children} key={item}/>)
+          TYPE_KEYS[type].map((item) => <FunctionButton type={item} task={task} key={item}/>)
         }
       </StyledButtonsWrapper>
     </StyledWrapper>
@@ -43,8 +43,7 @@ const TaskItem = ({children, color, type, selectTask, updateTaskColor}) => {
 };
 
 TaskItem.propTypes = {
-  children: PropTypes.string.isRequired,
-  color: PropTypes.string.isRequired,
+  task: PropTypes.object.isRequired,
   type: PropTypes.string.isRequired,
   selectTask: PropTypes.func.isRequired,
   updateTaskColor: PropTypes.func.isRequired,

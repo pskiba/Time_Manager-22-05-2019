@@ -5,7 +5,7 @@ import { withKnobs, select } from '@storybook/addon-knobs';
 
 
 
-storiesOf('Button', module)
+storiesOf('Atoms/Button', module)
   .addDecorator(withKnobs)
   .add('Primary', () => {
     const label = 'Colors';

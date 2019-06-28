@@ -4,7 +4,7 @@ import TaskItem from '../../molecules/taskItem/taskItem';
 import SelectButton from '../../atoms/selectButton/selectButton';
 import { connect } from 'react-redux';
 import chooseTaskAct from '../../../_redux/actions/chooseTaskAct';
-import updateTaskColorAct from '../../../_redux/actions/updateTaskColorAct'
+import updateTasksAct from '../../../_redux/actions/updateTasksAct'
 
 const TYPE_KEYS = {
   'all': 'All tasks',
@@ -50,20 +50,23 @@ class TasksSelector extends React.Component {
     }, 0);
   };
 
-  selectTask = (name) => {
+  selectTask = (_id) => {
     this.closeSelector();
-    this.props.chooseTaskAct(name);
+    this.props.chooseTaskAct(_id);
   };
 
-  updateTaskColor = (date) => {
-    this.props.updateTaskColorAct(date);
+  updateTaskColor = (data) => {
+    const {tasks, updateTasksAct} = this.props;
+    let task = tasks.find((item) => item._id === data._id);
+    task.color = data.color;
+    updateTasksAct(task);
   };
 
   render() {
     const {active} = this.state;
-    const {tasks, currentTaskName, type} = this.props;
+    const {tasks, currentTaskId, type} = this.props;
     const tasksToDisplay = type === 'popular' ? tasks.filter((item) => item.popular) : tasks;
-    const currentTask = tasksToDisplay.find((item) => item.name === currentTaskName);
+    const currentTask = tasksToDisplay.find((item) => item._id === currentTaskId);
 
     return (
       <StyledTaskWrapper tabIndex={0} onBlur={this.closeSelector}>
@@ -73,7 +76,7 @@ class TasksSelector extends React.Component {
         {active &&
           <StyledTaskList>
             {
-              tasksToDisplay.map((item, index) => <TaskItem key={index} color={item.color} type={type} selectTask={this.selectTask} updateTaskColor={this.updateTaskColor} >{item.name}</TaskItem>)
+              tasksToDisplay.map((item, index) => <TaskItem key={index} task={item} type={type} selectTask={this.selectTask} updateTaskColor={this.updateTaskColor} />)
             }
           </StyledTaskList>
         }
@@ -85,14 +88,14 @@ class TasksSelector extends React.Component {
 const mapStateToProps = (state) => {
   return {
     tasks: state.tasks,
-    currentTaskName: state.currentTaskName
+    currentTaskId: state.currentTaskId
   }
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     chooseTaskAct: (name) => chooseTaskAct(dispatch, name),
-    updateTaskColorAct: (date) => updateTaskColorAct(dispatch, date)
+    updateTasksAct: (date) => updateTasksAct(dispatch, date)
   }
 };
 

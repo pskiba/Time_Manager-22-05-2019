@@ -1,12 +1,24 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom'
+import {connect} from 'react-redux';
 import Input from '../../components/atoms/input/input';
 import Label from '../../components/atoms/label/label';
 import Button from '../../components/atoms/button/button';
 import Heading from '../../components/atoms/heading/heading';
 import Paragraph from '../../components/atoms/paragraph/paragraph';
+import IssueMassage from '../../components/atoms/issueMassage/issueMassage';
 import { routes } from '../../routes';
+import clearMessagesAct from '../../_redux/actions/clearMessagesAct';
+
+const TYPE_KEYS = {
+  'Log in': {
+    button: 'Log in'
+  },
+  'Registration': {
+    button: 'Create a count'
+  }
+};
 
 const StyledWrapper = styled.div`
   position: relative;
@@ -53,13 +65,18 @@ class AuthTemplate extends React.Component {
     this.props.callBack(this.state);
   };
 
+  componentWillUnmount() {
+    this.props.clearMessagesAct();
+  };
+
   render() {
-    const {title} = this.props;
+    const {title, issueMessage} = this.props;
     return(
       <StyledWrapper>
         <StyledHeading>{title}</StyledHeading>
         {title === 'Log in' && <StyledParagraph>If you do not have an account, <Link to={routes.register}>register</Link></StyledParagraph>}
         <StyledForm onSubmit={this.handleSubmit}>
+          {issueMessage &&  <StyledRow><IssueMassage>{issueMessage}</IssueMassage></StyledRow>}
           <StyledRow>
             <StyledLabel htmlFor="email">Email</StyledLabel>
             <Input id="email" type="email" onChange={this.handleChange}/>
@@ -69,7 +86,7 @@ class AuthTemplate extends React.Component {
             <Input type="password" id="password" onChange={this.handleChange}/>
           </StyledRow>
           <StyledRow>
-            <Button>Log in</Button>
+            <Button>{TYPE_KEYS[title].button}</Button>
           </StyledRow>
         </StyledForm>
       </StyledWrapper>
@@ -77,4 +94,16 @@ class AuthTemplate extends React.Component {
   }
 }
 
-export default AuthTemplate
+const mapStateToProps = (state) => {
+  return {
+    issueMessage: state.issueMessage
+  }
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    clearMessagesAct: () => clearMessagesAct(dispatch)
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AuthTemplate)

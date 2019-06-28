@@ -1,8 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import { NavLink, Link } from 'react-router-dom';
+import {connect} from 'react-redux';
 import Logo from '../../atoms/logo/logo';
 import { routes } from '../../../routes';
+import logOutAct from '../../../_redux/actions/logOutAct';
 
 const NavItem = styled.li`
   display: inline-block;
@@ -29,7 +31,7 @@ const StyledWrapper = styled.div`
   align-content: center;
 `;
 
-const Sidebar = () => {
+const Sidebar = ({loginStatus, logOutAct}) => {
   return (
     <StyledWrapper>
       <Logo>LOGO</Logo>
@@ -42,15 +44,26 @@ const Sidebar = () => {
             <NavLink to={routes.statistics} activeclass="active">Statistics</NavLink>
           </NavItem>
           <NavItem>
-            <NavLink to={routes.logIn} activeclass="active">Log in</NavLink>
+            {
+              loginStatus === 'log in' ? <NavLink to={routes.logIn} activeclass="active" onClick={logOutAct}>Log out</NavLink> : <NavLink to={routes.logIn} activeclass="active">Log in</NavLink>
+            }
           </NavItem>
-          {/*<NavItem>*/}
-          {/*  <NavLink to={routes.logOut} activeclass="active">Log out</NavLink>*/}
-          {/*</NavItem>*/}
         </StyledNavList>
       </nav>
     </StyledWrapper>
   )
 };
 
-export default Sidebar;
+const mapStateToProps = (state) => {
+  return {
+    loginStatus: state.loginStatus
+  }
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    logOutAct: () => logOutAct(dispatch)
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);

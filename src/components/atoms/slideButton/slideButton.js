@@ -21,6 +21,12 @@ const StyledButton = styled.div`
   height: 25px;
   border: 2px solid ${({theme}) => theme.color.black};
   transform: rotate(45deg);
+  &:hover {
+    background: ${({theme}) => theme.color.transparentBlack};
+  }
+  &:active {
+    background: ${({theme}) => theme.color.black};
+  }
 `;
 
 const SlideButton = ({left, callBack}) => {

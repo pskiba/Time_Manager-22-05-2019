@@ -1,5 +1,5 @@
-const editTaskAct = (dispatch, name) => {
-  dispatch({type: 'EDIT_TASK', payload: name});
+const editTaskAct = (dispatch, _id) => {
+  dispatch({type: 'EDIT_TASK', payload: _id});
 };
 
 export default editTaskAct;

@@ -7,6 +7,7 @@ export const theme = {
     steelBlue: 'SteelBlue',
     lightSteelBlue : 'LightSteelBlue',
     darkgray: 'darkgray',
+    cornsilk: '#FFF8DC',
     transparentBlack: 'rgba(0,0,0,0.2)'
   },
   fontSize: {

@@ -13,13 +13,13 @@ const StyledColorSampler = styled.input.attrs({
   border: 1px solid ${({theme}) => theme.color.black};
 `;
 
-const ColorSampler = ({color, name, handlerChange, ...props}) =>  {
-  return <StyledColorSampler color={color} {...props} onChange={(e) => handlerChange({color: e.target.value, name: name})} />
+const ColorSampler = ({color, _id, handlerChange, ...props}) =>  {
+  return <StyledColorSampler color={color} {...props} onChange={(e) => handlerChange({color: e.target.value, _id: _id})} />
 };
 
 ColorSampler.propTypes = {
   color: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
+  _id: PropTypes.string,
   handlerChange: PropTypes.func.isRequired
 };
 

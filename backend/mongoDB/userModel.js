@@ -1,9 +1,5 @@
 const mongoose = require('mongoose');
 
-const TasksDateSchema =  mongoose.Schema({
-
-});
-
 const TaskSchema = mongoose.Schema({
   _id: {
     type: mongoose.Schema.Types.ObjectId,
@@ -16,6 +12,9 @@ const TaskSchema = mongoose.Schema({
   description: {
     type: String,
   },
+  status: {
+    type: String
+  },
   color: {
     type: String,
     require: true
@@ -23,10 +22,6 @@ const TaskSchema = mongoose.Schema({
   popular: {
     type: Boolean,
     require: true
-  },
-  date: {
-    type: TasksDateSchema,
-    default: {}
   }
 });
 
@@ -37,6 +32,7 @@ const userSchema = mongoose.Schema({
   },
   email: {
     type: String,
+    match: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
     require: true
   },
   password: {
@@ -44,7 +40,13 @@ const userSchema = mongoose.Schema({
     require: true
   },
   tasks: {
-    type: TaskSchema,
+    type: [TaskSchema],
+  },
+  dates: {
+    type: [{ date: String, toDo: Object, done: Object }]
   }
 });
 
+const userModel = mongoose.model('user', userSchema);
+
+module.exports = userModel;

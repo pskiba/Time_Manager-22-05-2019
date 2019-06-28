@@ -8,6 +8,8 @@ import {connect} from 'react-redux';
 import setModalStatusAct from '../../_redux/actions/setModalStatusAct';
 import Legend from '../../components/organisms/legend/legend';
 import DateBar from '../../components/organisms/dateBar/dateBar';
+import {Redirect} from 'react-router-dom';
+import {routes} from '../../routes';
 
 const StyledWrapper = styled.div`
   position: relative;
@@ -25,7 +27,11 @@ const StyledSelectorsWrapper = styled.div`
   margin-bottom: 70px;
 `;
 
-const HomePage = ({modalStatus, setModalStatusAct}) => {
+const HomePage = (props) => {
+  const {modalStatus, setModalStatusAct, loginStatus} = props;
+  if(loginStatus !== 'log in') {
+    return <Redirect to={routes.logIn}/>
+  }
   const handleClick = () => {
     setModalStatusAct('creat');
   };
@@ -49,7 +55,8 @@ const HomePage = ({modalStatus, setModalStatusAct}) => {
 
 const mapStateToProps = (state) => {
   return {
-    modalStatus: state.modalStatus
+    modalStatus: state.modalStatus,
+    loginStatus: state.loginStatus
   }
 };
 

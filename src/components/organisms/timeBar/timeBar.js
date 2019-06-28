@@ -3,16 +3,17 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import SlideButton from '../../atoms/slideButton/slideButton';
 import Hour from '../../molecules/hour/hour';
-import Quarter from '../../atoms/quarter/quarter';
+import Quarter from '../../molecules/quarter/quarter';
 import { connect } from 'react-redux';
-import updateTasksAct from '../../../_redux/actions/updateTasksAct';
+import updateDatesAct from '../../../_redux/actions/updateDatesAct';
 import ModuleName from '../../atoms/moduleName/moduleName';
-
 
 const HOURS = [
   '0:00', '1:00', '2:00', '3:00', '4:00', '5:00', '6:00', '7:00', '8:00', '9:00', '10:00', '11:00', '12:00',
   '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'
 ];
+
+const QUARTER_IN_MILLISECONDS = 15 * 60 * 1000;
 
 const TYPE_KEYS = {
   toDo: 'To do',
@@ -21,7 +22,7 @@ const TYPE_KEYS = {
 
 const StyledWrapper = styled.div`
   width: 920px;
-  margin: 20px auto;
+  margin: 50px auto 20px;
 `;
 
 const StyledTimeBarType = styled(ModuleName)`
@@ -36,14 +37,15 @@ const StyledInnerWrapper = styled.div`
 `;
 
 const StyledSliderWrapper = styled.div`
-  position: relative;
-  width: 840px;
-  height: 24px;
-  overflow: hidden;
+    position: absolute;
+    left: 40px;
+    width: 840px;
+    height: 24px;
+    clip: rect(-100px,840px,26px,0px);
 `;
 
 const StyledSlider = styled.div`
-  position: absolute;
+  position: relative;
   width: 1440px;
   display: flex;
   transition: transform 0.3s ease-in-out;
@@ -53,62 +55,69 @@ const StyledSlider = styled.div`
 class TimeBar extends React.Component {
 
   state = {
-    hoursContainerPosition: 0
+    hoursContainerPosition: -7,
   };
 
-  getQuarter = (index) => {
-    const {tasks, type, currentDate} = this.props;
-    for(let i = 0; i < tasks.length; i++) {
-      let task = tasks[i];
-      let taskDate = task.date[currentDate];
-      if(taskDate && taskDate[type] && taskDate[type].indexOf(index) > -1) {
-        return {name: task.name, color: task.color}
-      }
-    }
-    return {name: 'empty', color: '#ffffff'}
+  getQuarter = (_id) => {
+    const {tasks} = this.props;
+    const task = tasks.find((item) => item._id === _id);
+    return {_id: task._id, name: task.name, description: task.description, color: task.color}
+
   };
 
   getQuarters = () => {
+    const {type, currentDate, dates} = this.props;
+    const dateItem = dates.find((item) => item.date === currentDate);
+    const quartersPositions = dateItem ? dateItem[type] : null;
     let quarters = [];
     for(let i = 0; i < 96; i++) {
-      quarters.push(this.getQuarter(i));
+      if(quartersPositions && quartersPositions[i]) {
+        quarters.push(this.getQuarter(quartersPositions[i]));
+      } else {
+        quarters.push({_id: null, name: '', description: '', color: '#ffffff'});
+      }
     }
     return quarters;
   };
 
-  handleClick = (quarter) => {
-    const {currentTaskName, type, tasks, updateTasksAct, currentDate} = this.props;
-    if(!currentTaskName) return;
-
-    const currentTask = tasks.find((item) => item.name === currentTaskName);
-
-    if(!currentTask.date[currentDate]) {
-      currentTask.date[currentDate] = {
-        'toDo': [],
-        'done': []
-      }
+  isToLateOrToEarly = (type, position, currentDate) => {
+    const selectedTimeInMilS = position * QUARTER_IN_MILLISECONDS;
+    const currentDateInMilS = new Date(currentDate).getTime();
+    if(type === 'done' && new Date(currentDateInMilS + selectedTimeInMilS).getTime() > new Date().getTime()) {
+      alert('you can not report that task was done in the future');
+      return true;
+    } else if (type === 'toDo' && new Date(currentDateInMilS + selectedTimeInMilS).getTime() + QUARTER_IN_MILLISECONDS < new Date().getTime()) {
+      alert('you can not mark tasks to do in the past');
+      return true;
     }
-    const positions = currentTask.date[currentDate][type];
+    return false;
+  };
+
+  handleClick = (quarter) => {
+    const {currentTaskId, type, dates, updateDatesAct, currentDate} = this.props;
     let data = {};
 
-    data.currentTask = {...currentTask};
+    if(!currentTaskId) return;
 
-    if(quarter.name === currentTask.name) {
+    if(this.isToLateOrToEarly(type, quarter.position, currentDate)) return;
 
-      data.currentTask.date[currentDate][type] = positions.filter((item) => item !== quarter.position);
+    let dateItem = dates.find((item) => item.date === currentDate);
 
-    } else if(quarter.name === 'empty') {
-
-      data.currentTask.date[currentDate][type].push(quarter.position);
-
+    if(!dateItem) {
+      data.dateItem = { 'date': currentDate, 'done': {}, 'toDo': {} };
+      data.isNew = true;
     } else {
-
-      data.currentTask.date[currentDate][type].push(quarter.position);
-      data.previousTask = tasks.find((task) => task.name === quarter.name);
-      data.previousTask.date[currentDate][type] = data.previousTask.date[currentDate][type].filter((item) => item !== quarter.position);
+      data.dateItem = dateItem;
     }
 
-    updateTasksAct(data);
+    if(currentTaskId === quarter._id) {
+      delete data.dateItem[type][quarter.position];
+    } else {
+      data.dateItem[type] = !data.dateItem[type] ? {} : data.dateItem[type];
+      data.dateItem[type][quarter.position] = currentTaskId;
+    }
+
+    updateDatesAct(data);
   };
 
   changeSliderPosition = (value) => {
@@ -122,6 +131,7 @@ class TimeBar extends React.Component {
 
   render() {
     const {type} = this.props;
+    const quarters = this.getQuarters();
     return (
       <StyledWrapper>
         <StyledTimeBarType>{TYPE_KEYS[type]}</StyledTimeBarType>
@@ -130,7 +140,8 @@ class TimeBar extends React.Component {
           <StyledSliderWrapper>
             <StyledSlider positionX={this.state.hoursContainerPosition}>
               {HOURS.map((item) => <Hour key={item}>{item}</Hour>)}
-              {this.getQuarters().map((item, index) => <Quarter key={index} position={index} name={item.name} color={item.color} callBack={this.handleClick} />)}
+              {quarters.map((item, index) => <Quarter type="transparent" key={index} position={index} _id={item._id} name={item.name} description={item.description} color={item.color} handleClick={this.handleClick} />)}
+              {quarters.map((item, index) => <Quarter type="color" key={index} position={index} _id={item._id} name={item.name} description={item.description} color={item.color} />)}
             </StyledSlider>
           </StyledSliderWrapper>
           <SlideButton left={false} callBack={this.changeSliderPosition}/>
@@ -143,21 +154,22 @@ class TimeBar extends React.Component {
 const mapStateToProps = (state) => {
   return {
     tasks: state.tasks,
-    currentTaskName: state.currentTaskName,
+    dates: state.dates,
+    currentTaskId: state.currentTaskId,
     currentDate: state.currentDate
   }
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateTasksAct: (data) => updateTasksAct(dispatch, data)
+    updateDatesAct: (data) => updateDatesAct(dispatch, data)
   }
 };
 
 TimeBar.propTypes = {
   type: PropTypes.string.isRequired,
   tasks: PropTypes.array.isRequired,
-  currentTaskName: PropTypes.string.isRequired
+  currentTaskId: PropTypes.string.isRequired
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TimeBar);

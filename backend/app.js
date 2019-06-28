@@ -1,13 +1,16 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const expressHttpProxy = require('express-http-proxy');
+const userRouter = require('./api/routers/userRouter');
 
 const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
-app.use('/', expressHttpProxy('http://localhost:8080'));
+app.use('/api/user/', userRouter);
+
+app.use('/', expressHttpProxy('http://localhost:3000'));
 
 app.use((req, res, next) => {
   const err = new Error('no found');

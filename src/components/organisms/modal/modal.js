@@ -7,8 +7,9 @@ import Button from '../../atoms/button/button';
 import ColorSampler from '../../atoms/colorSampler/colorSampler';
 import Label from '../../atoms/label/label';
 import Input from '../../atoms/input/input';
+import IssueMassage from '../../atoms/issueMassage/issueMassage';
 
-import saveEditedTaskAct from '../../../_redux/actions/saveEditedTaskAct';
+import updateTasksAct from '../../../_redux/actions/updateTasksAct';
 import createTaskAct from '../../../_redux/actions/createTaskAct';
 import setModalStatusAct from '../../../_redux/actions/setModalStatusAct';
 
@@ -18,7 +19,6 @@ const TASK_MODEL = {
   'popular': false,
   'description': '',
   'status': '',
-  'date': {}
 };
 
 const StyledModalWrapper = styled.div`
@@ -84,10 +84,10 @@ class Modal extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const {modalStatus, editedTask, saveEditedTaskAct, createTaskAct} = this.props;
+    const {modalStatus, editedTask, updateTasksAct, createTaskAct} = this.props;
     const {topicName, topicDescription, color} = this.state;
     if(modalStatus === 'edit') {
-      saveEditedTaskAct({...editedTask, name: topicName, description: topicDescription, color: color});
+      updateTasksAct({...editedTask, name: topicName, description: topicDescription, color: color});
     } else if (modalStatus === 'creat') {
       createTaskAct({...TASK_MODEL, name: topicName, description: topicDescription, color: color});
     }
@@ -106,10 +106,11 @@ class Modal extends React.Component {
   };
 
   render() {
-    const {topicName, topicDescription, color} = this.state;
+    const {topicName, topicDescription, color, issueMessage} = this.state;
     return (
       <StyledModalWrapper onClick={this.close} id="modal-wrapper">
         <StyledModalBody>
+          {issueMessage && <IssueMassage>{issueMessage}</IssueMassage>}
           <form onSubmit={this.handleSubmit}>
             <StyledRow>
               <StyledLabel htmlFor="topicName">Topic name</StyledLabel>
@@ -134,13 +135,14 @@ class Modal extends React.Component {
 const mapStateToProps = (state) => {
   return {
     modalStatus: state.modalStatus,
-    editedTask: state.tasks.find((item) => state.editedTaskName === item.name)
+    editedTask: state.tasks.find((item) => state.editedTaskId === item._id),
+    issueMessage: state.issueMessage
   }
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    saveEditedTaskAct: (data) => saveEditedTaskAct(dispatch, data),
+    updateTasksAct: (data) => updateTasksAct(dispatch, data),
     createTaskAct: (data) => createTaskAct(dispatch, data),
     setModalStatusAct: (status) => setModalStatusAct(dispatch, status)
   }
@@ -149,7 +151,8 @@ const mapDispatchToProps = (dispatch) => {
 Modal.propTypes = {
   modalStatus: PropTypes.string.isRequired,
   editedTask: PropTypes.object,
-  saveEditedTaskAct: PropTypes.func.isRequired,
+  issueMessage: PropTypes.string,
+  updateTasksAct: PropTypes.func.isRequired,
   createTaskAct: PropTypes.func.isRequired,
   setModalStatusAct: PropTypes.func.isRequired,
 };

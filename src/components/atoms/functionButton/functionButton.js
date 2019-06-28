@@ -7,22 +7,25 @@ import CheckMarkIcon from '../../../assets/checkmarkIcon.svg';
 import EditIconIcon from '../../../assets/editIcon.svg';
 import TrashIcon from '../../../assets/trashIcon.svg';
 
-import removeFromPopularAct from '../../../_redux/actions/removeFromPopularAct';
-import addToPopularAct from '../../../_redux/actions/addToPopularAct';
+import updateTasksAct from '../../../_redux/actions/updateTasksAct';
 import editTaskAct from '../../../_redux/actions/editTaskAct';
 
 const TYPE_KEYS = {
   'addToPopular': {
     icon: CheckMarkIcon,
-    action: 'addToPopularAct'
-  },
+    action: 'updateTasksAct',
+    getData: (task) => ({...task, popular: true})
+  }
+  ,
   'edit': {
     icon: EditIconIcon,
-    action: 'editTaskAct'
+    action: 'editTaskAct',
+    getData: (task) => task._id
   },
   'removeFromPopular': {
     icon: TrashIcon,
-    action: 'removeFromPopularAct'
+    action: 'updateTasksAct',
+    getData: (task) => ({...task, popular: false})
   },
 };
 
@@ -40,11 +43,11 @@ const StyledFunctionButton = styled.div`
 `;
 
 const FunctionButton = (props) => {
-  const {type, name} = props;
+  const {type, task} = props;
   const handleClick = (e) => {
     e.stopPropagation();
     e.nativeEvent.stopImmediatePropagation();
-    props[TYPE_KEYS[type].action](name);
+    props[TYPE_KEYS[type].action](TYPE_KEYS[type].getData(task));
   };
 
   return <StyledFunctionButton type={type} onClick={handleClick}/>
@@ -52,16 +55,15 @@ const FunctionButton = (props) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    removeFromPopularAct: (name) => removeFromPopularAct(dispatch, name),
-    addToPopularAct: (name) => addToPopularAct(dispatch, name),
-    editTaskAct: (name) => editTaskAct(dispatch, name)
+    updateTasksAct: (task) => updateTasksAct(dispatch, task),
+    editTaskAct: (id) => editTaskAct(dispatch, id)
   }
 };
 
 FunctionButton.propTypes = {
+  task: PropTypes.object.isRequired,
   type: PropTypes.string.isRequired,
-  removeFromPopularAct: PropTypes.func.isRequired,
-  addToPopularAct: PropTypes.func.isRequired,
+  updateTasksAct: PropTypes.func.isRequired,
   editTaskAct: PropTypes.func.isRequired,
 };
 

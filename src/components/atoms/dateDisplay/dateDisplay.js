@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const DateDisplay = styled.div`
+  cursor: pointer;
   padding: 4px 0 4px 0;
   text-align: center;
   width: 180px;
