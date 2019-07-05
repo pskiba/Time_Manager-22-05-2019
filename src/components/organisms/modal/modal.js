@@ -3,42 +3,19 @@ import styled from 'styled-components';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
-import Button from '../../atoms/button/button';
-import ColorSampler from '../../atoms/colorSampler/colorSampler';
-import Label from '../../atoms/label/label';
-import Input from '../../atoms/input/input';
 import IssueMassage from '../../atoms/issueMassage/issueMassage';
-
-import updateTasksAct from '../../../_redux/actions/updateTasksAct';
-import createTaskAct from '../../../_redux/actions/createTaskAct';
 import setModalStatusAct from '../../../_redux/actions/setModalStatusAct';
-
-const TASK_MODEL = {
-  'name': '',
-  'color': '#ff0000',
-  'popular': false,
-  'description': '',
-  'status': '',
-};
 
 const StyledModalWrapper = styled.div`
   position: fixed;
   z-index: 99999;
   left: 0;
   top: 0;
-  background: rgba(0,0,0,0.2);
+  background: rgba(0,0,0,0.1);
   width: 100%;
   height: 100vh;
   display: flex;
   justify-content: center;
-`;
-
-const StyledRow = styled.div`
-  padding-bottom: 15px;
-`;
-
-const StyledLabel = styled(Label)`
-  padding: 0 0 5px 8px;
 `;
 
 const StyledModalBody = styled.div`
@@ -47,85 +24,27 @@ const StyledModalBody = styled.div`
   top: 20vh;
   width: 60%;
   max-width: 700px;
-  padding: 35px 35px 25px 35px;
+  padding: 15px 35px 25px 35px;
   background: ${({theme}) => theme.color.white};
+  border-radius: 5px;
+  box-shadow: 0 0 20px 10px rgba(0,0,0,0.3);
 `;
 
-
-const StyledTextArea = styled.textarea`
-  width: 100%;
-`;
-
-const StyledActionSection = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  padding-top: 10px;
-  width: 100%;
-`;
-
-const StyledColorSampler = styled(ColorSampler)`
-  margin: 0 10px 0 10px;
-`;
-
-class Modal extends React.Component {
-
-  state = {
-    color: this.props.editedTask ? this.props.editedTask.color : '#ff0000',
-    topicName: this.props.editedTask ? this.props.editedTask.name : 'new task',
-    topicDescription: this.props.editedTask ? this.props.editedTask.description : ''
-  };
+class NewModal extends React.Component {
 
   close = (e) => {
     if (e && e.target && e.target.id === 'modal-wrapper') {
-      this.props.setModalStatusAct('closed');
+      this.props.setModalStatusAct(null);
     }
-  };
-
-  handleSubmit = (e) => {
-    e.preventDefault();
-    const {modalStatus, editedTask, updateTasksAct, createTaskAct} = this.props;
-    const {topicName, topicDescription, color} = this.state;
-    if(modalStatus === 'edit') {
-      updateTasksAct({...editedTask, name: topicName, description: topicDescription, color: color});
-    } else if (modalStatus === 'creat') {
-      createTaskAct({...TASK_MODEL, name: topicName, description: topicDescription, color: color});
-    }
-  };
-
-  updateColor = (data) => {
-    this.setState({
-      color: data.color
-    });
-  };
-
-  updateTaskName = (e) => {
-    this.setState({
-      [e.target.id]: e.target.value,
-    });
   };
 
   render() {
-    const {topicName, topicDescription, color, issueMessage} = this.state;
+    const {issueMessage, children} = this.props;
     return (
       <StyledModalWrapper onClick={this.close} id="modal-wrapper">
         <StyledModalBody>
           {issueMessage && <IssueMassage>{issueMessage}</IssueMassage>}
-          <form onSubmit={this.handleSubmit}>
-            <StyledRow>
-              <StyledLabel htmlFor="topicName">Topic name</StyledLabel>
-              <Input id="topicName" onChange={this.updateTaskName} value={topicName}/>
-            </StyledRow>
-            <StyledRow>
-              <StyledLabel htmlFor="topicDescription">Topic description</StyledLabel>
-              <StyledTextArea id="topicDescription" onChange={this.updateTaskName} value={topicDescription}/>
-            </StyledRow>
-            <StyledActionSection>
-              <Label color={color} htmlFor="colorSampler">Choose color</Label>
-              <StyledColorSampler id="colorSampler" color={color} name={topicName} handlerChange={this.updateColor}/>
-              <Button red={false}>Save</Button>
-            </StyledActionSection>
-          </form>
+          {children}
         </StyledModalBody>
       </StyledModalWrapper>
     )
@@ -134,27 +53,19 @@ class Modal extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    modalStatus: state.modalStatus,
-    editedTask: state.tasks.find((item) => state.editedTaskId === item._id),
     issueMessage: state.issueMessage
   }
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateTasksAct: (data) => updateTasksAct(dispatch, data),
-    createTaskAct: (data) => createTaskAct(dispatch, data),
     setModalStatusAct: (status) => setModalStatusAct(dispatch, status)
   }
 };
 
-Modal.propTypes = {
-  modalStatus: PropTypes.string.isRequired,
-  editedTask: PropTypes.object,
+NewModal.propTypes = {
   issueMessage: PropTypes.string,
-  updateTasksAct: PropTypes.func.isRequired,
-  createTaskAct: PropTypes.func.isRequired,
   setModalStatusAct: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Modal);
+export default connect(mapStateToProps, mapDispatchToProps)(NewModal);

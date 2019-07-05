@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import TaskItem from '../../molecules/taskItem/taskItem';
-import SelectButton from '../../atoms/selectButton/selectButton';
+import SelectButton from '../../atoms/buttons/selectButton';
 import { connect } from 'react-redux';
 import chooseTaskAct from '../../../_redux/actions/chooseTaskAct';
 import updateTasksAct from '../../../_redux/actions/updateTasksAct'
@@ -71,9 +71,12 @@ class TasksSelector extends React.Component {
     return (
       <StyledTaskWrapper tabIndex={0} onBlur={this.closeSelector}>
         <SelectButton active={active} onClick={this.toggleSelector} color={currentTask ? currentTask.color : 'white'} >
-          {currentTask ? currentTask.name : TYPE_KEYS[type]}
+          {
+          	currentTask ? currentTask.name : TYPE_KEYS[type]
+          }
         </SelectButton>
-        {active &&
+        {
+					active &&
           <StyledTaskList>
             {
               tasksToDisplay.map((item, index) => <TaskItem key={index} task={item} type={type} selectTask={this.selectTask} updateTaskColor={this.updateTaskColor} />)

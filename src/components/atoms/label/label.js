@@ -7,6 +7,7 @@ const Label = styled.label`
   font-size: ${({theme}) => theme.fontSize.l};
   color: ${({color, theme}) => color ? color : theme.color.black};
   display: inline-block;
+  padding: 5px 10px 5px 8px;
 `;
 
 Label.propTypes = {

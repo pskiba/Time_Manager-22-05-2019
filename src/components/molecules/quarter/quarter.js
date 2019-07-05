@@ -5,7 +5,7 @@ import ToolTip from '../toolTip/toolTip';
 
 const WIDTH = 15;
 
-const QuarterWrapper = styled.div`
+const StyledWrapper = styled.div`
   background: ${({color}) => color};
   width: ${WIDTH}px;
   height: 22px;
@@ -30,12 +30,12 @@ const QuarterWrapper = styled.div`
 const Quarter = ({position, name, description, _id, color, type, handleClick}) => {
   if(type === 'transparent') {
     return (
-      <QuarterWrapper  color="none" zIndex={3} position={position} onClick={() => handleClick({_id: _id, position: position, name: name})}>
+      <StyledWrapper  color="none" zIndex={3} position={position} onClick={() => handleClick({_id: _id, position: position, name: name})}>
         {_id && <ToolTip task={{title: name, description: description }}/>}
-      </QuarterWrapper>
+      </StyledWrapper>
     )
   } else {
-    return <QuarterWrapper color={color} zIndex={1} position={position} />
+    return <StyledWrapper color={color} zIndex={1} position={position} />
   }
 };
 
@@ -44,7 +44,7 @@ Quarter.propTypes = {
   name: PropTypes.string.isRequired,
   color: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
-  callBack: PropTypes.func.isRequired,
+  handleClick: PropTypes.func,
 };
 
 export default Quarter;

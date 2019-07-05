@@ -1,12 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import SlideButton from '../../atoms/slideButton/slideButton';
+import SlideButton from '../../atoms/buttons/slideButton';
 import Hour from '../../molecules/hour/hour';
 import Quarter from '../../molecules/quarter/quarter';
 import { connect } from 'react-redux';
-import updateDatesAct from '../../../_redux/actions/updateDatesAct';
 import ModuleName from '../../atoms/moduleName/moduleName';
+import WatchTip from '../../molecules/watchTip/watchTip';
+
+import updateDatesAct from '../../../_redux/actions/updateDatesAct';
 
 const HOURS = [
   '0:00', '1:00', '2:00', '3:00', '4:00', '5:00', '6:00', '7:00', '8:00', '9:00', '10:00', '11:00', '12:00',
@@ -41,7 +43,7 @@ const StyledSliderWrapper = styled.div`
     left: 40px;
     width: 840px;
     height: 24px;
-    clip: rect(-100px,840px,26px,0px);
+    clip: rect(-100px,840px,50px,0px);
 `;
 
 const StyledSlider = styled.div`
@@ -104,7 +106,7 @@ class TimeBar extends React.Component {
     let dateItem = dates.find((item) => item.date === currentDate);
 
     if(!dateItem) {
-      data.dateItem = { 'date': currentDate, 'done': {}, 'toDo': {} };
+      data.dateItem = { 'date': currentDate, 'done': {}, 'toDo': {}, 'note': '', 'intervalValue': 0, 'remindersList': []};
       data.isNew = true;
     } else {
       data.dateItem = dateItem;
@@ -130,7 +132,7 @@ class TimeBar extends React.Component {
   };
 
   render() {
-    const {type} = this.props;
+    const {type, actualDate, currentDate, minute} = this.props;
     const quarters = this.getQuarters();
     return (
       <StyledWrapper>
@@ -139,6 +141,7 @@ class TimeBar extends React.Component {
           <SlideButton left={true} callBack={this.changeSliderPosition}/>
           <StyledSliderWrapper>
             <StyledSlider positionX={this.state.hoursContainerPosition}>
+              {(type === 'toDo' && actualDate === currentDate) && <WatchTip minute={minute}/>}
               {HOURS.map((item) => <Hour key={item}>{item}</Hour>)}
               {quarters.map((item, index) => <Quarter type="transparent" key={index} position={index} _id={item._id} name={item.name} description={item.description} color={item.color} handleClick={this.handleClick} />)}
               {quarters.map((item, index) => <Quarter type="color" key={index} position={index} _id={item._id} name={item.name} description={item.description} color={item.color} />)}
@@ -156,7 +159,9 @@ const mapStateToProps = (state) => {
     tasks: state.tasks,
     dates: state.dates,
     currentTaskId: state.currentTaskId,
-    currentDate: state.currentDate
+    currentDate: state.currentDate,
+    actualDate: state.actualDate,
+    minute: state.minute
   }
 };
 

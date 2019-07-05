@@ -7,6 +7,7 @@ const SelectButton = styled.div`
   width: 300px;
   padding: 3px 16px 3px 10px;
   height: 24px;
+  cursor: pointer;
   background-color: ${({color}) => color};
   border: 1px solid ${({theme}) => theme.color.black};
   &::after {

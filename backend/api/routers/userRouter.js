@@ -8,6 +8,7 @@ const userRouter = express.Router();
 
 userRouter.patch('/update_task/:id', checkAuth, (req, res, next) => {
   const task = req.body;
+  
   userModel.findOneAndUpdate({'_id' : req.params.id, 'tasks._id': task._id}, {'$set': {'tasks.$': task}})
     .then((resolve) => {
       if(resolve) {
@@ -21,10 +22,10 @@ userRouter.patch('/update_task/:id', checkAuth, (req, res, next) => {
 userRouter.patch('/update_date/:id', checkAuth, (req, res, next) => {
 
   const { dateItem } = req.body;
+  console.log(dateItem);
   if(req.body.isNew) {
     userModel.findByIdAndUpdate(req.params.id, { '$push': { 'dates': dateItem }})
       .then((resolve) => {
-        console.log(resolve);
         if(resolve) {
           res.status(201).json({
             message: 'dates was updated'
@@ -34,7 +35,10 @@ userRouter.patch('/update_date/:id', checkAuth, (req, res, next) => {
   } else {
     userModel.update({'_id': req.params.id, 'dates.date': dateItem.date}, {'$set': {
         'dates.$.done' : dateItem.done,
-        'dates.$.toDo' : dateItem.toDo
+        'dates.$.toDo' : dateItem.toDo,
+        'dates.$.note' : dateItem.note,
+        'dates.$.intervalValue' : dateItem.intervalValue,
+        'dates.$.remindersList' : dateItem.remindersList
       }})
       .then((resolve) => {
         console.log(resolve);
@@ -45,6 +49,9 @@ userRouter.patch('/update_date/:id', checkAuth, (req, res, next) => {
         }
       });
   }
+});
+
+userRouter.patch('/addNote/:id', checkAuth, (req, res, next) => {
 
 });
 

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import TaskDescription from '../../atoms/taskDescription/taskDescription';
 import ColorPicker from '../../atoms/colorSampler/colorSampler';
-import FunctionButton from '../../atoms/functionButton/functionButton';
+import FunctionButton from '../../atoms/buttons/functionButton';
 
 import PropTypes from "prop-types";
 

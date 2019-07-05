@@ -15,6 +15,7 @@ const StyledButtonWrapper = styled.div`
 
 const StyledButton = styled.div`
   position: relative;
+  cursor: pointer;
   left: -12px;
   top: 6px;
   width: 25px;

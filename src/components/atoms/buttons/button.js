@@ -7,6 +7,7 @@ const Button = styled.button`
   padding: 4px 18px;
   border: 1px solid darkgray;
   border-radius: 3px;
+  cursor: pointer;
   ${({ red }) => red && css`
     background-color: ${({theme}) => theme.color.red};
   `}

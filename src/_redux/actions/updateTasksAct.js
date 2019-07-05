@@ -1,7 +1,9 @@
 const updateTasksAct = (dispatch, data) => {
   const authorization = sessionStorage.getItem('token');
   const userId = sessionStorage.getItem('userId');
-
+  
+	dispatch({type: 'UPDATE_TASK_START', payload: null});
+	console.log(data);
   fetch(window.location.origin + '/api/user/update_task/' + userId, {
       method: 'PATCH',
       headers: {
@@ -12,9 +14,9 @@ const updateTasksAct = (dispatch, data) => {
     })
     .then((response) => response.json())
     .then((response) => {
-
+			dispatch({type: 'UPDATE_TASK', payload: data});
     });
-  dispatch({type: 'UPDATE_TASKS', payload: data});
+  
 };
 
 export default updateTasksAct;

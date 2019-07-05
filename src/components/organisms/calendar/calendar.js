@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import QuantityButton from '../../atoms/buttons/quantityButton';
+
 const DAYS = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
@@ -43,23 +45,6 @@ const ButtonsWrapper = styled.div`
   display: flex;
   width: 50px;
   justify-content: space-between;
-`;
-
-const Button = styled.div`
-  cursor: pointer;
-  width: 24px;
-  height: 15px;
-  text-align: center;
-  line-height: 13px;
-  background: ${({theme}) => theme.color.darkgray};
-  border: 1px solid ${({theme}) => theme.color.black};
-  color: ${({theme}) => theme.color.white};
-  font-weight: ${({theme}) => theme.fontWeight.bold};
-  font-size: ${({theme}) => theme.fontSize.m};
-  transition: all 0.4s;
-  &:hover {
-    background: ${({theme}) => theme.color.black};
-  }
 `;
 
 const Table = styled.table`
@@ -127,11 +112,10 @@ class Calendar extends React.Component {
     return table;
   };
 
-  changeDate = (e) => {
+  changeDate = (value) => {
     let newDate;
     const {date} = this.state;
-    const number = e.target.textContent === '-' ? -1 : 1;
-    newDate = new Date(date.getFullYear(), date.getMonth() + number);
+    newDate = new Date(date.getFullYear(), date.getMonth() + value);
     this.setState({
       date: newDate
     });
@@ -170,8 +154,8 @@ class Calendar extends React.Component {
               {year} {MONTHS[month]}
             </DateWrapper>
             <ButtonsWrapper>
-              <Button onClick={this.changeDate}>&#60;</Button>
-              <Button onClick={this.changeDate}>&#x3e;</Button>
+              <QuantityButton onClick={() => this.changeDate(-1)}>&#60;</QuantityButton>
+              <QuantityButton onClick={() => this.changeDate(1)}>&#x3e;</QuantityButton>
             </ButtonsWrapper>
           </TopSection>
           <Table>

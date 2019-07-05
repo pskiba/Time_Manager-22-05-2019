@@ -8,6 +8,7 @@ import {routes} from '../../routes';
 import PropTypes from 'prop-types';
 
 const RegistrationPage = ({registerAct, registerStatus, clearRegisterStatusAct}) => {
+	
   if (registerStatus === 'user was register') {
     clearRegisterStatusAct();
     return <Redirect to={routes.logIn} />;
@@ -16,6 +17,7 @@ const RegistrationPage = ({registerAct, registerStatus, clearRegisterStatusAct})
   const createUser = (data) => {
     registerAct(data)
   };
+  
   return (
     <AuthTemplate title="Registration" callBack={createUser}/>
   )

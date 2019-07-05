@@ -1,14 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom'
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
+
 import Input from '../../components/atoms/input/input';
 import Label from '../../components/atoms/label/label';
-import Button from '../../components/atoms/button/button';
+import Row from '../../components/atoms/row/row';
+import Button from '../../components/atoms/buttons/button';
 import Heading from '../../components/atoms/heading/heading';
 import Paragraph from '../../components/atoms/paragraph/paragraph';
 import IssueMassage from '../../components/atoms/issueMassage/issueMassage';
+
 import { routes } from '../../routes';
+
 import clearMessagesAct from '../../_redux/actions/clearMessagesAct';
 
 const TYPE_KEYS = {
@@ -33,14 +37,6 @@ const StyledHeading = styled(Heading)`
 const StyledForm = styled.form`
   max-width: 500px;
   margin: 30px auto;
-`;
-
-const StyledRow = styled.div`
-  padding-bottom: 15px;
-`;
-
-const StyledLabel = styled(Label)`
-  padding: 0 0 5px 8px;
 `;
 
 const StyledParagraph = styled(Paragraph)`
@@ -74,20 +70,28 @@ class AuthTemplate extends React.Component {
     return(
       <StyledWrapper>
         <StyledHeading>{title}</StyledHeading>
-        {title === 'Log in' && <StyledParagraph>If you do not have an account, <Link to={routes.register}>register</Link></StyledParagraph>}
+					{
+						title === 'Log in' &&
+						<StyledParagraph>If you do not have an account, <Link to={routes.register}>register</Link></StyledParagraph>
+					}
         <StyledForm onSubmit={this.handleSubmit}>
-          {issueMessage &&  <StyledRow><IssueMassage>{issueMessage}</IssueMassage></StyledRow>}
-          <StyledRow>
-            <StyledLabel htmlFor="email">Email</StyledLabel>
+          {
+            issueMessage &&
+            <Row>
+              <IssueMassage>{issueMessage}</IssueMassage>
+            </Row>
+          }
+          <Row>
+            <Label htmlFor="email">Email</Label>
             <Input id="email" type="email" onChange={this.handleChange}/>
-          </StyledRow>
-          <StyledRow>
-            <StyledLabel htmlFor="password">Password</StyledLabel>
+          </Row>
+          <Row>
+            <Label htmlFor="password">Password</Label>
             <Input type="password" id="password" onChange={this.handleChange}/>
-          </StyledRow>
-          <StyledRow>
+          </Row>
+          <Row>
             <Button>{TYPE_KEYS[title].button}</Button>
-          </StyledRow>
+          </Row>
         </StyledForm>
       </StyledWrapper>
     )

@@ -43,7 +43,7 @@ const userSchema = mongoose.Schema({
     type: [TaskSchema],
   },
   dates: {
-    type: [{ date: String, toDo: Object, done: Object }]
+    type: [{ date: String, toDo: Object, done: Object, note: String, intervalValue: Number, remindersList: Array }]
   }
 });
 

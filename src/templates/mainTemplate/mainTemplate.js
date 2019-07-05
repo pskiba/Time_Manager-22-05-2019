@@ -8,6 +8,7 @@ import downloadDataAct from '../../_redux/actions/downloadDataAct';
 import Loading from '../../components/molecules/loading/loading';
 
 class MainTemplate extends React.Component {
+	
   componentDidMount() {
     if(sessionStorage.getItem('userId') && this.props.beforeUploadData) {
       this.props.downloadDataAct();

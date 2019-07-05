@@ -9,18 +9,20 @@ import TrashIcon from '../../../assets/trashIcon.svg';
 
 import updateTasksAct from '../../../_redux/actions/updateTasksAct';
 import editTaskAct from '../../../_redux/actions/editTaskAct';
+import setModalStatusAct from '../../../_redux/actions/setModalStatusAct';
 
 const TYPE_KEYS = {
   'addToPopular': {
     icon: CheckMarkIcon,
     action: 'updateTasksAct',
     getData: (task) => ({...task, popular: true})
-  }
-  ,
+  },
   'edit': {
     icon: EditIconIcon,
     action: 'editTaskAct',
-    getData: (task) => task._id
+    getData: (task) => {
+      return {id: task._id, modalStatus: {type: 'TASK', action: 'DISPLAY'}}
+    }
   },
   'removeFromPopular': {
     icon: TrashIcon,
@@ -56,7 +58,11 @@ const FunctionButton = (props) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     updateTasksAct: (task) => updateTasksAct(dispatch, task),
-    editTaskAct: (id) => editTaskAct(dispatch, id)
+    setModalStatusAct: (data) => setModalStatusAct(dispatch, data),
+    editTaskAct: (data) => {
+      editTaskAct(dispatch, data.id);
+      setModalStatusAct(dispatch, data.modalStatus);
+    }
   }
 };
 

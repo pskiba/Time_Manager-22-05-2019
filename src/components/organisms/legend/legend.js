@@ -32,16 +32,13 @@ const Legend = ({tasks, chooseTaskAct, updateTasksAct, dates, currentDate}) => {
   const getSelectedTasksId = () => {
     const dateObject = dates.find((item) => item.date === currentDate);
     if(dateObject) {
-
       const toDoIds = dateObject.toDo ? Object.keys(dateObject.toDo).map((key) => dateObject.toDo[key]) : [];
       const doneIds = dateObject.done ? Object.keys(dateObject.done).map((key) => dateObject.done[key]) : [];
       const ids = [...toDoIds, ...doneIds];
       const uniqueIds = [...new Set(ids)];
-
       return uniqueIds;
     }
     return [];
-
   };
 
   const tasksId = getSelectedTasksId();

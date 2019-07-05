@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import LoadingGif from '../../../assets/giphy.gif';
 
-const LoadingWrapper = styled.div`
+const StyledWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -17,9 +17,9 @@ const LoadingWrapper = styled.div`
 
 const Loading = () => {
   return (
-    <LoadingWrapper>
+    <StyledWrapper>
       <img src={LoadingGif} alt="loading"/>
-    </LoadingWrapper>
+    </StyledWrapper>
   )
 };
 

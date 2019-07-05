@@ -5,7 +5,7 @@ const Input = styled.input.attrs({
   type: ({type}) => type,
   id: ({id}) => id
 })`
-  width: 100%;
+  width: ${({small}) => small ? 'auto': '100%'};
   padding: 4px 10px 4px 10px;
   color: ${({theme}) => theme.color.black};
 `;
