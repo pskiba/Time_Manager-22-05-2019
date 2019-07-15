@@ -16,6 +16,7 @@ import DateBar from '../../components/organisms/dateBar/dateBar';
 import setModalStatusAct from '../../_redux/actions/setModalStatusAct';
 
 import {routes} from '../../routes';
+import ToolTip from "../../components/molecules/toolTip/toolTip";
 
 const StyledWrapper = styled.div`
   position: relative;
@@ -40,7 +41,7 @@ const StyledSelectorsWrapper = styled.div`
   margin-bottom: 70px;
 `;
 
-const HomePage = ({modalStatus, setModalStatusAct, loginStatus}) => {
+const HomePage = ({modalStatus, setModalStatusAct, loginStatus, toolTipSettings}) => {
 	
   if(loginStatus !== 'log in') {
     return <Redirect to={routes.logIn}/>
@@ -60,6 +61,7 @@ const HomePage = ({modalStatus, setModalStatusAct, loginStatus}) => {
 
   return (
     <StyledWrapper>
+			{toolTipSettings.on && <ToolTip {...toolTipSettings}/>}
       {
       	modalStatus &&
 				<Modal>
@@ -92,13 +94,14 @@ const HomePage = ({modalStatus, setModalStatusAct, loginStatus}) => {
 const mapStateToProps = (state) => {
   return {
     modalStatus: state.modalStatus,
-    loginStatus: state.loginStatus
+    loginStatus: state.loginStatus,
+		toolTipSettings: state.toolTipSettings
   }
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setModalStatusAct: (status) => setModalStatusAct(dispatch, status)
+    setModalStatusAct: (status) => setModalStatusAct(dispatch, status),
   }
 };
 

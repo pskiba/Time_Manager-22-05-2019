@@ -16,15 +16,15 @@ const StyledModalWrapper = styled.div`
   height: 100vh;
   display: flex;
   justify-content: center;
+  align-items: center;
 `;
 
 const StyledModalBody = styled.div`
   position: relative;
-  align-self: flex-start;
-  top: 20vh;
+  margin-top: -100px;
   width: 60%;
   max-width: 700px;
-  padding: 15px 35px 25px 35px;
+  padding: 15px 30px 25px 30px;
   background: ${({theme}) => theme.color.white};
   border-radius: 5px;
   box-shadow: 0 0 20px 10px rgba(0,0,0,0.3);

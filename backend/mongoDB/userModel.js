@@ -43,8 +43,13 @@ const userSchema = mongoose.Schema({
     type: [TaskSchema],
   },
   dates: {
-    type: [{ date: String, toDo: Object, done: Object, note: String, intervalValue: Number, remindersList: Array }]
-  }
+    type: [{ date: String, toDo: Object, done: Object, note: String, intervalReminders: Array, reminders: Array }]
+  },
+	globalIntervalReminders: {
+  	type: Array,
+		default: []
+	}
+ 
 });
 
 const userModel = mongoose.model('user', userSchema);

@@ -11,6 +11,7 @@ export const theme = {
     transparentBlack: 'rgba(0,0,0,0.2)'
   },
   fontSize: {
+		xs: '0.8rem',
     s: '1rem',
     m: '1.2rem',
     l: '1.6rem',
@@ -21,5 +22,6 @@ export const theme = {
     light: 300,
     regular: 400,
     bold: 600
-  }
+  },
+	wrapperWidth: 920
 };

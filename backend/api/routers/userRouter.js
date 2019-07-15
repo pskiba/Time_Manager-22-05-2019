@@ -6,6 +6,17 @@ const {checkAuth, USER_JWT_KEY} = require('../middlewares/checkAuth');
 const userModel = require('../../mongoDB/userModel');
 const userRouter = express.Router();
 
+userRouter.patch('/update_global_interval/:id', checkAuth, (req, res, next) => {
+	userModel.findOneAndUpdate({'_id': req.params.id}, {'$set': {'globalIntervalReminders': req.body}})
+		.then((resolve) => {
+			if(resolve) {
+				res.status(201).json({
+					message: 'Global interval reminders was updated'
+				});
+			}
+		});
+});
+
 userRouter.patch('/update_task/:id', checkAuth, (req, res, next) => {
   const task = req.body;
   
@@ -22,7 +33,6 @@ userRouter.patch('/update_task/:id', checkAuth, (req, res, next) => {
 userRouter.patch('/update_date/:id', checkAuth, (req, res, next) => {
 
   const { dateItem } = req.body;
-  console.log(dateItem);
   if(req.body.isNew) {
     userModel.findByIdAndUpdate(req.params.id, { '$push': { 'dates': dateItem }})
       .then((resolve) => {
@@ -37,8 +47,8 @@ userRouter.patch('/update_date/:id', checkAuth, (req, res, next) => {
         'dates.$.done' : dateItem.done,
         'dates.$.toDo' : dateItem.toDo,
         'dates.$.note' : dateItem.note,
-        'dates.$.intervalValue' : dateItem.intervalValue,
-        'dates.$.remindersList' : dateItem.remindersList
+        'dates.$.intervalReminders' : dateItem.intervalReminders,
+        'dates.$.reminders' : dateItem.reminders
       }})
       .then((resolve) => {
         console.log(resolve);
@@ -68,7 +78,8 @@ userRouter.get('/:id', checkAuth, (req, res, next) => {
             _id: record._id,
             email: record.email,
             tasks: record.tasks,
-            dates: record.dates
+            dates: record.dates,
+						globalIntervalReminders: record.globalIntervalReminders
           }
         })
       }

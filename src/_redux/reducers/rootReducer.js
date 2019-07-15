@@ -14,13 +14,35 @@ const initState = {
   registerStatus: '',
   loginStatus: sessionStorage.getItem('userId') ? 'log in' : '',
   beforeUploadData: true,
-  minute: new Date().getHours() * 60 + new Date().getMinutes()
-
+  minute: new Date().getHours() * 60 + new Date().getMinutes(),
+	globalIntervalReminders: [],
+	voices: [],
+	toolTipSettings: {
+  	on: true,
+		title: 'title',
+		description: 'description',
+		pX: 0,
+		pY: 0
+	}
 };
 
 const rootReducer = (state = initState, action) => {
-  console.log(action);
   switch(action.type) {
+		case 'SET_TOOL_TIP' :
+			return {
+				...state,
+				toolTipSettings: action.payload
+			};
+		case 'SET_GLOBAL_REMINDER' :
+			return {
+				...state,
+				globalIntervalReminders: action.payload
+			};
+		case 'SET_VOICES' :
+			return {
+				...state,
+				voices: action.payload
+			};
     case 'TIMER':
       return {
         ...state,
@@ -43,12 +65,14 @@ const rootReducer = (state = initState, action) => {
         ...state,
         responseWaiting: true
       };
-    case 'DOWNLOAD_DATA':
+		case 'DOWNLOAD_DATA':
+			console.log(action.payload);
       return {
         ...state,
         tasks: action.payload.tasks ? action.payload.tasks : [],
         dates: action.payload.dates ? action.payload.dates : [],
         email: action.payload.email,
+				globalIntervalReminders: action.payload.globalIntervalReminders ? action.payload.globalIntervalReminders : [],
         _id: action.payload._id,
         loginStatus: 'log in',
         responseWaiting: false,

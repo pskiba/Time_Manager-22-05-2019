@@ -1,52 +1,66 @@
 import React from 'react';
-import styled from 'styled-components';
 import { connect } from 'react-redux';
 import timerAct from '../../../_redux/actions/timerAct';
-import alarm1 from '../../../assets/alarm1.mp3';
-import alarm2 from '../../../assets/alarm3.mp3';
 
-const StyledWrapper = styled.div`
-  position: absolute;
-  top: 200px;
-  left: 200px;
-`;
 
-const TimeManager = ({timerAct, date}) => {
-  const audioRef1 = React.createRef();
-  const audioRef2 = React.createRef();
-  let lastMinute = 0;
+class TimeManager extends React.Component {
+	
+	lastMinute = 0;
+	
+	play = (data) => {
+		const {voices} = this.props;
+		let speechText = new SpeechSynthesisUtterance(data.message);
+		speechText.voice = voices[data.voice];
+		speechText.rate = 0.5;
+		for(let i = 0; i < data.repeat; i++) {
+			window.speechSynthesis.speak(speechText);
+		}
+		
+	};
+	
+	setAlarm = (currentMinute) => {
+		const {globalIntervalReminders, date} = this.props;
+		if(globalIntervalReminders && date) {
+			let globalIntervalReminder = globalIntervalReminders.length ? globalIntervalReminders.find((item) => (currentMinute + item.tStart) % item.gap === 0) : null;
+			
+			let reminders = date.reminders.length ? date.reminders.find((item) => currentMinute % ((item.hour * 60) + item.minute) === 0) : null;
+			let intervalReminders = date.intervalReminders.length ? date.intervalReminders.find((item) => (currentMinute + item.tStart) % item.gap === 0) : null;
+			globalIntervalReminder && this.play(globalIntervalReminder);
+			reminders && this.play(reminders);
+			intervalReminders && this.play(intervalReminders);
+		}
+	};
+	
+	loop = () => {
+		const { timerAct } = this.props;
+		const newDate = new Date();
+		const minute = newDate.getHours() * 60 + newDate.getMinutes();
+		if(this.lastMinute !== minute) {
+			this.setAlarm(minute);
+		}
+		
+		
+		this.lastMinute = minute;
+		timerAct(minute);
+	};
+	
+	interval = setInterval(this.loop, 1000);
+	
+	componentWillUnmount() {
+		clearInterval(this.interval);
+	}
+	
+	render() {
+		return <></>
+	}
+}
 
-  const setAlarm = (previousMinute, currentMinute) => {
-    if(previousMinute !== currentMinute && date) {
-      if(date && date.intervalValue && currentMinute % date.intervalValue === 0) {
-        audioRef2.current.play();
-      } else if(date && date.remindersList && date.remindersList.find((item) => item.h * 60 + item.min === currentMinute)) {
-        audioRef1.current.play();
-      }
-    }
-  };
-
-  const loop = () => {
-    const newDate = new Date();
-    const minute = newDate.getHours() * 60 + newDate.getMinutes();
-    setAlarm(lastMinute, minute);
-
-    lastMinute = minute;
-    timerAct(minute);
-  };
-
-  const interval = setInterval(loop, 10000);
-  return (
-    <StyledWrapper>
-      <audio src={alarm1} ref={audioRef1} id="audio">audio</audio>
-      <audio src={alarm2} ref={audioRef2} id="audio">audio</audio>
-    </StyledWrapper>
-  )
-};
 
 const mapStateToProps = (state) => {
   return {
     date: state.dates.find((item) => item.date === state.actualDate),
+		globalIntervalReminders: state.globalIntervalReminders,
+		voices: state.voices,
   }
 };
 

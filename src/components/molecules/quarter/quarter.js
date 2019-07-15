@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import ToolTip from '../toolTip/toolTip';
+import Placeholder from '../placeholder/placeholder';
 
 const WIDTH = 15;
 
@@ -27,13 +28,9 @@ const StyledWrapper = styled.div`
   }
 `;
 
-const Quarter = ({position, name, description, _id, color, type, handleClick}) => {
+const Quarter = ({position, title, _id, color, type, handleClick}) => {
   if(type === 'transparent') {
-    return (
-      <StyledWrapper  color="none" zIndex={3} position={position} onClick={() => handleClick({_id: _id, position: position, name: name})}>
-        {_id && <ToolTip task={{title: name, description: description }}/>}
-      </StyledWrapper>
-    )
+    return <StyledWrapper  color="none" zIndex={3} position={position} onClick={() => handleClick({_id: _id, position: position, name: title})} />
   } else {
     return <StyledWrapper color={color} zIndex={1} position={position} />
   }
@@ -47,4 +44,4 @@ Quarter.propTypes = {
   handleClick: PropTypes.func,
 };
 
-export default Quarter;
+export default Placeholder(Quarter);

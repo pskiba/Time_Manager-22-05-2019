@@ -1,12 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
+
+const HEIGHT = window.innerHeight;
+const WIN_WIDTH = window.innerWidth;
+const WRAP_WIDTH = 250;
 
 const Wrapper = styled.div`
-  position: absolute;
-  left: -4px;
-  bottom: 30px;
-  width: 250px;
+  position: fixed;
+  left: ${({pX}) => pX}px;
+  bottom: ${({pY}) => HEIGHT - pY + 15}px;
+  width: ${WRAP_WIDTH}px;
   height: auto;
   max-height: 76px;
   z-index: 10;
@@ -39,30 +43,29 @@ const Triangle = styled.div`
   width: 16px;
   height: 16px;
   position: absolute;
-  left: 4px;
+  left: ${({pX}) => pX}px;
   bottom: -7px;
   transform: rotate(45deg);
   background: ${({theme}) => theme.color.cornsilk};
 `;
 
-const ToolTip = ({task}) => {
+const ToolTip = ({title, description, pX, pY, theme}) => {
+	let left = (pX + (((WIN_WIDTH / 2) - pX) / 3.5)) - (WRAP_WIDTH / 2);
+	let triangleLeft = Math.min(-(((WIN_WIDTH / 2) - pX) / 3.5) + (WRAP_WIDTH / 2), 230);
   return (
-    <Wrapper onClick={(e) => e.stopPropagation()}>
+    <Wrapper onClick={(e) => e.stopPropagation()} pX={left} pY={pY}>
       <TextContainer>
         <TopicTitle>
-          {task.title}
+          {title}
         </TopicTitle>
         <TopicDescription>
-          {task.description}
+          {description}
         </TopicDescription>
       </TextContainer>
-      <Triangle/>
+      <Triangle pX={triangleLeft}/>
     </Wrapper>
   )
 };
 
-ToolTip.propTypes = {
-  task: PropTypes.object.isRequired
-};
 
 export default ToolTip;

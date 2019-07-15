@@ -104,9 +104,9 @@ class TimeBar extends React.Component {
     if(this.isToLateOrToEarly(type, quarter.position, currentDate)) return;
 
     let dateItem = dates.find((item) => item.date === currentDate);
-
+    
     if(!dateItem) {
-      data.dateItem = { 'date': currentDate, 'done': {}, 'toDo': {}, 'note': '', 'intervalValue': 0, 'remindersList': []};
+      data.dateItem = { 'date': currentDate, 'done': {}, 'toDo': {}, 'note': '', 'intervalReminders': [], 'reminders': []};
       data.isNew = true;
     } else {
       data.dateItem = dateItem;
@@ -143,8 +143,8 @@ class TimeBar extends React.Component {
             <StyledSlider positionX={this.state.hoursContainerPosition}>
               {(type === 'toDo' && actualDate === currentDate) && <WatchTip minute={minute}/>}
               {HOURS.map((item) => <Hour key={item}>{item}</Hour>)}
-              {quarters.map((item, index) => <Quarter type="transparent" key={index} position={index} _id={item._id} name={item.name} description={item.description} color={item.color} handleClick={this.handleClick} />)}
-              {quarters.map((item, index) => <Quarter type="color" key={index} position={index} _id={item._id} name={item.name} description={item.description} color={item.color} />)}
+              {quarters.map((item, index) => <Quarter type="transparent" key={index} position={index} _id={item._id} title={item.name} description={item.description} color={item.color} handleClick={this.handleClick} />)}
+              {quarters.map((item, index) => <Quarter type="color" key={index} position={index} _id={item._id} title={item.name} description={item.description} color={item.color} />)}
             </StyledSlider>
           </StyledSliderWrapper>
           <SlideButton left={false} callBack={this.changeSliderPosition}/>
