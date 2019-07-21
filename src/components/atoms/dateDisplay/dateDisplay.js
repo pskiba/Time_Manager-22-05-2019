@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import TooltipContainer from '../../molecules/tooltipContainer/tooltipContainer';
 
-const DateDisplay = styled.div`
+const StyledDateDisplay = styled.div`
   cursor: pointer;
   padding: 4px 0 4px 0;
   text-align: center;
@@ -11,4 +12,8 @@ const DateDisplay = styled.div`
   font-size: ${({theme}) => theme.fontSize.l};
 `;
 
-export default DateDisplay;
+const DateDisplay = ({children, calendarOn}) => {
+	return <StyledDateDisplay onClick={calendarOn}>{children}</StyledDateDisplay>
+};
+
+export default TooltipContainer(DateDisplay);

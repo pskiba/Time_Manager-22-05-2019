@@ -19,11 +19,15 @@ const StyledTaskWrapper = styled.div`
 
 const StyledTaskList = styled.ul`
   position: absolute;
+  animation: heightAnim;
+  animation-duration: 0.5s;
   border: 1px solid ${({theme}) => theme.color.black};
   padding: 10px 0 10px 0;
   margin: 0;
   display: inline-block;
   width: 400px;
+  max-height: 300px;
+  overflow-y: auto;
   background-color: ${({theme}) => theme.color.white};
 `;
 

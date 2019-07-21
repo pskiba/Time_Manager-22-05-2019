@@ -6,7 +6,6 @@ import { theme } from '../../theme/mainTheme';
 import GlobalStyled from '../../theme/globalStyle';
 import SideBar from '../../components/organisms/sidebar/sidebar';
 import Loading from '../../components/molecules/loading/loading';
-import ToolTip from '../../components/molecules/toolTip/toolTip';
 
 import downloadDataAct from '../../_redux/actions/downloadDataAct';
 import setVoicesAct from '../../_redux/actions/setVoicesAct';
@@ -27,13 +26,13 @@ class MainTemplate extends React.Component {
   }
 
   render() {
-    const {children, responseWaiting} = this.props;
+    const {children} = this.props;
     return (
       <div>
         <GlobalStyled/>
         <ThemeProvider theme={theme}>
           <>
-            {responseWaiting && <Loading/>}
+						<Loading/>
             <SideBar/>
             {children}
           </>
@@ -45,8 +44,7 @@ class MainTemplate extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    beforeUploadData: state.beforeUploadData,
-    responseWaiting: state.responseWaiting
+    beforeUploadData: state.beforeUploadData
   }
 };
 

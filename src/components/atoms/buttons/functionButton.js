@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
+import TooltipContainer from '../../molecules/tooltipContainer/tooltipContainer';
+
 import CheckMarkIcon from '../../../assets/checkmarkIcon.svg';
 import EditIconIcon from '../../../assets/editIcon.svg';
 import TrashIcon from '../../../assets/trashIcon.svg';
@@ -73,4 +75,4 @@ FunctionButton.propTypes = {
   editTaskAct: PropTypes.func.isRequired,
 };
 
-export default connect(null, mapDispatchToProps)(FunctionButton);
+export default connect(null, mapDispatchToProps)(TooltipContainer(FunctionButton));

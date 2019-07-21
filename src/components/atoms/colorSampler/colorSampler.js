@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
+import TooltipContainer from '../../molecules/tooltipContainer/tooltipContainer';
+
 const StyledColorSampler = styled.input.attrs({
   type: 'color',
   value: ({color}) => color,
@@ -23,4 +25,4 @@ ColorSampler.propTypes = {
   handlerChange: PropTypes.func.isRequired
 };
 
-export default ColorSampler;
+export default TooltipContainer(ColorSampler);

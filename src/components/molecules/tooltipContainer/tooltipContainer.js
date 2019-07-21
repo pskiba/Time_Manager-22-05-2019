@@ -3,15 +3,17 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import setToolTipAct from '../../../_redux/actions/setToolTipAct';
 
-const Placeholder = (WrappedComponent) => {
+const TooltipContainer = (WrappedComponent) => {
 	return (props) => {
 		const { setToolTipAct, title, description} = props;
-		const handleMouseOver = (e) => {
+		const setToolTip = (e) => {
+			e.stopPropagation();
 			const BCR = e.target.getBoundingClientRect();
 			
-			setToolTipAct({on: true, title: title, description: description, pX: BCR.left, pY: BCR.top });
+			setToolTipAct({on: true, title: title, description: description, pX: (BCR.left + (BCR.width / 2)), pY: BCR.top });
 		};
-		const handleMouseOut = () => {
+		const closeToolTip = (e) => {
+			e.stopPropagation();
 			setToolTipAct({on: false, title: '', description: ''});
 		};
 		
@@ -19,7 +21,7 @@ const Placeholder = (WrappedComponent) => {
 			<>
 				{
 					props.title ?
-					<span onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
+					<span onMouseEnter={setToolTip} onMouseLeave={closeToolTip} onClick={closeToolTip}>
 						{WrappedComponent(props)}
 					</span> : WrappedComponent(props)
 				}
@@ -34,4 +36,4 @@ const mapDispatchToProps = (dispatch) => {
 	};
 };
 
-export default compose(connect(null, mapDispatchToProps),Placeholder);
+export default compose(connect(null, mapDispatchToProps),TooltipContainer);

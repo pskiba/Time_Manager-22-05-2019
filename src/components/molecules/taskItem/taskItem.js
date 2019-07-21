@@ -13,6 +13,12 @@ const TYPE_KEYS = {
   'legend': ['edit']
 };
 
+const TITLES = {
+	'addToPopular': 'Add task to popular',
+	'removeFromPopular': 'Remove task from popular',
+	'edit': 'Open task'
+};
+
 const StyledWrapper = styled.li`
   display: flex;
   justify-content: space-between;
@@ -31,11 +37,11 @@ const TaskItem = ({task, type, selectTask, updateTaskColor}) => {
 
   return (
     <StyledWrapper onClick={() => selectTask(task._id)}>
-      <ColorPicker color={task.color} _id={task._id} handlerChange={updateTaskColor}/>
+      <ColorPicker color={task.color} _id={task._id} handlerChange={updateTaskColor} title="Change color"/>
       <TaskDescription>{task.name}</TaskDescription>
       <StyledButtonsWrapper>
         {
-          TYPE_KEYS[type].map((item) => <FunctionButton type={item} task={task} key={item}/>)
+          TYPE_KEYS[type].map((item) => <FunctionButton title={TITLES[item]} type={item} task={task} key={item}/>)
         }
       </StyledButtonsWrapper>
     </StyledWrapper>

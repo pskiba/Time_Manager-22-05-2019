@@ -11,6 +11,8 @@ const Wrapper = styled.div.attrs({
 })`
   position: absolute; 
   display: flex;
+  animation: scaleAnim;
+  animation-duration: 0.3s;
   justify-content: center;
   align-items: flex-start;
   z-index: 999;

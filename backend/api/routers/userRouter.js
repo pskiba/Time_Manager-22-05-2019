@@ -51,7 +51,6 @@ userRouter.patch('/update_date/:id', checkAuth, (req, res, next) => {
         'dates.$.reminders' : dateItem.reminders
       }})
       .then((resolve) => {
-        console.log(resolve);
         if(resolve) {
           res.status(201).json({
             message: 'dates was updated'

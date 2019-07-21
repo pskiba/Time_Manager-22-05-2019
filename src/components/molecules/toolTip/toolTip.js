@@ -8,6 +8,8 @@ const WRAP_WIDTH = 250;
 
 const Wrapper = styled.div`
   position: fixed;
+  animation: scaleAnim;
+  animation-duration: 0.3s;
   left: ${({pX}) => pX}px;
   bottom: ${({pY}) => HEIGHT - pY + 15}px;
   width: ${WRAP_WIDTH}px;
@@ -15,6 +17,7 @@ const Wrapper = styled.div`
   max-height: 76px;
   z-index: 10;
   border-radius: 5px 5px 5px 0;
+  box-shadow: 0 0 5px 2px rgba(0,0,0,0.1);
   background: ${({theme}) => theme.color.cornsilk};
 `;
 const TextContainer = styled.div`
@@ -42,6 +45,10 @@ const TopicDescription = styled.p`
 const Triangle = styled.div`
   width: 16px;
   height: 16px;
+  animation: triangleAnim;
+  animation-delay: 0.3s;
+  animation-duration: 0.3s;
+  animation-fill-mode: both;
   position: absolute;
   left: ${({pX}) => pX}px;
   bottom: -7px;
@@ -51,7 +58,8 @@ const Triangle = styled.div`
 
 const ToolTip = ({title, description, pX, pY, theme}) => {
 	let left = (pX + (((WIN_WIDTH / 2) - pX) / 3.5)) - (WRAP_WIDTH / 2);
-	let triangleLeft = Math.min(-(((WIN_WIDTH / 2) - pX) / 3.5) + (WRAP_WIDTH / 2), 230);
+	let triangleLeft = Math.min(-(((WIN_WIDTH / 2) - pX) / 3.5) + ((WRAP_WIDTH - 16) / 2), 230);
+	triangleLeft = Math.max(triangleLeft, 5);
   return (
     <Wrapper onClick={(e) => e.stopPropagation()} pX={left} pY={pY}>
       <TextContainer>

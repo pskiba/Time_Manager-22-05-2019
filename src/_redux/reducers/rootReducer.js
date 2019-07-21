@@ -4,6 +4,7 @@ const initState = {
   tasks: [],
   dates: [],
   currentTaskId: '',
+	currentDateObj: null,
   currentDate: new Date().toString().split(' ').splice(0, 4).join(' '),
   actualDate: new Date().toString().split(' ').splice(0, 4).join(' '),
   modalStatus: '',
@@ -66,7 +67,6 @@ const rootReducer = (state = initState, action) => {
         responseWaiting: true
       };
 		case 'DOWNLOAD_DATA':
-			console.log(action.payload);
       return {
         ...state,
         tasks: action.payload.tasks ? action.payload.tasks : [],
@@ -135,7 +135,8 @@ const rootReducer = (state = initState, action) => {
     case 'CHANGE_DATE':
       return {
         ...state,
-        currentDate: action.payload
+        currentDate: action.payload,
+				currentDateObj: state.dates.find((item) => item.date === action.payload)
       };
     case 'EDIT_TASK':
       return {
@@ -182,11 +183,15 @@ const rootReducer = (state = initState, action) => {
     case 'UPDATE_DATES':
       return {
         ...state,
-        responseWaiting: false,
         dates: action.payload.isNew ? [...state.dates, action.payload.dateItem] : state.dates.map((item) => {
           return item.date === action.payload.dateItem.date ? action.payload.dateItem : item
         })
       };
+		case 'UPDATE_DATES_DEEP':
+			return {
+				...state,
+				responseWaiting: false,
+			};
     default :
       return {
         ...state

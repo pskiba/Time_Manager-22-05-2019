@@ -22,8 +22,6 @@ class DateBar extends React.Component {
   state = {
     calendarIsOn: false
   };
-  
-  dateDisplayRef = React.createRef();
 
   changeDate = (value) => {
     const {currentDate, changeDateAct} = this.props;
@@ -57,7 +55,7 @@ class DateBar extends React.Component {
       <Wrapper>
         {calendarIsOn && <Calendar calendarOff={this.calendarOff} chooseDay={this.chooseDay}/>}
         <SlideButton left={true} callBack={this.changeDate}/>
-        <DateDisplay ref={this.dateDisplayRef} onClick={this.calendarOn} indexOf>{currentDate}</DateDisplay>
+        <DateDisplay calendarOn={this.calendarOn} title="Open calendar">{currentDate}</DateDisplay>
         <SlideButton left={false} callBack={this.changeDate}/>
       </Wrapper>
     )

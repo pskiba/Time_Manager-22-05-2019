@@ -21,6 +21,8 @@ const StyledModalWrapper = styled.div`
 
 const StyledModalBody = styled.div`
   position: relative;
+	animation: scaleAnim;
+  animation-duration: 0.3s;
   margin-top: -100px;
   width: 60%;
   max-width: 700px;

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 import LoadingGif from '../../../assets/giphy.gif';
 
 const StyledWrapper = styled.div`
@@ -15,13 +16,24 @@ const StyledWrapper = styled.div`
   background: rgba(0,0,0,0.2);
 `;
 
-const Loading = () => {
+const Loading = ({responseWaiting}) => {
   return (
-    <StyledWrapper>
-      <img src={LoadingGif} alt="loading"/>
-    </StyledWrapper>
+  	<>
+			{
+				responseWaiting &&
+				<StyledWrapper>
+					<img src={LoadingGif} alt="loading"/>
+				</StyledWrapper>
+			}
+		</>
   )
 };
 
-export default Loading;
+const mapStateToProps = (state) => {
+	return {
+		responseWaiting: state.responseWaiting
+	}
+};
+
+export default connect(mapStateToProps)(Loading);
 
