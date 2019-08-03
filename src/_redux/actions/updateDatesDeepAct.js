@@ -1,7 +1,6 @@
 const updateDatesDeepAct = (dispatch, data) => {
 	const userId = sessionStorage.getItem('userId');
 	const authorization = sessionStorage.getItem('token');
-	console.log(data);
 	dispatch({type: 'UPDATE_DATES_START', payload: null});
 	fetch(window.location.origin + '/api/user/update_date/' + userId, {
 		method: 'PATCH',

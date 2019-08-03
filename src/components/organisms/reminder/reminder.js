@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
-import Input from '../../atoms/input/input';
 import Row from '../../atoms/row/row';
 import ActionRow from '../../atoms/actionRow/actionRow';
 import Button from '../../atoms/buttons/button';
@@ -16,17 +15,12 @@ import setModalStatusAct from '../../../_redux/actions/setModalStatusAct';
 import updateDatesAct from '../../../_redux/actions/updateDatesAct';
 import setGlobalReminder from '../../../_redux/actions/setGlobalReminder';
 
-const StyledNumberInput = styled(Input)`
-  width: 50px;
-  height: auto;
-  padding: 2px;
-  margin-right: 10px;
-`;
 
 const StyledContainer = styled.div`
-	max-height: 152px;
+	max-height: 102px;
 	overflow: hidden;
 	overflow-y: auto;
+	border: 1px solid ${({theme}) => theme.color.black};
 `;
 
 const StyledLightItalic = styled.span`
@@ -103,26 +97,37 @@ class Reminder extends React.Component {
       })
     })
   };
+  
+  saveReminderSettings = () => {
+		const {date, currentDate, setModalStatusAct, updateDatesAct, setGlobalReminder} = this.props;
+		const {reminders, oneDayIntervalReminders, globalIntervalReminders} = this.state;
+		let data = {};
+	
+		if(!date) {
+			data.dateItem = { 'date': currentDate, 'done': {}, 'toDo': {}, 'note': '', 'intervalReminders': oneDayIntervalReminders, 'reminders': reminders};
+			data.isNew = true;
+		} else {
+			data.dateItem = {...date, 'intervalReminders': oneDayIntervalReminders, 'reminders': reminders};
+		}
+	
+		updateDatesAct(data);
+		setGlobalReminder(globalIntervalReminders);
+		setModalStatusAct({type: 'REMINDER', action: 'DISPLAY'});
+	};
+  
+  editReminder = () => {
+		const {setModalStatusAct} = this.props;
+		setModalStatusAct({type: 'REMINDER', action: 'EDIT'});
+	};
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const {date, currentDate, setModalStatusAct, updateDatesAct, setGlobalReminder} = this.props;
-    const {reminders, oneDayIntervalReminders, globalIntervalReminders} = this.state;
-    let data = {};
-
-    if(!date) {
-      data.dateItem = { 'date': currentDate, 'done': {}, 'toDo': {}, 'note': '', 'intervalReminders': oneDayIntervalReminders, 'reminders': reminders};
-      data.isNew = true;
-    } else {
-      data.dateItem = {...date, 'intervalReminders': oneDayIntervalReminders, 'reminders': reminders};
-    }
-
-    updateDatesAct(data);
-    setGlobalReminder(globalIntervalReminders);
-
-		
-    // setModalStatusAct({type: 'NOTE', action: 'DISPLAY'});
-
+		const {state} = this.props;
+		if(state === 'EDIT') {
+			this.saveReminderSettings();
+		} else {
+			this.editReminder();
+		}
   };
 
   render() {
@@ -134,35 +139,44 @@ class Reminder extends React.Component {
           <Heading>Reminder <StyledLightItalic>{currentDate}</StyledLightItalic></Heading>
         </Row>
         <form onSubmit={this.handleSubmit}>
-          <StyledContainer>
-						<Row>
-							<Label htmlFor="note">One day interval reminder</Label>
-							<QuantityButton onClick={this.addOneDayIntervalReminders}>+</QuantityButton>
+					<Row>
+						<Label htmlFor="note">One day interval reminder</Label>
+						<QuantityButton disabled={state !== 'EDIT'} onClick={this.addOneDayIntervalReminders}>+</QuantityButton>
+					</Row>
+					{
+						oneDayIntervalReminders.length > 0 &&
+						<StyledContainer>
 							{
-								oneDayIntervalReminders.map((item, index) => <ReminderItem type="interval" {...item} voices={voices} key={String(Math.random() + index)} removeItem={this.removeOneDayIntervalReminders} update={this.updateOneDayIntervalReminders}/>)
+								oneDayIntervalReminders.map((item, index) => <ReminderItem disabled={state !== 'EDIT'} type="interval" {...item} voices={voices} key={String(Math.random() + index)} removeItem={this.removeOneDayIntervalReminders} update={this.updateOneDayIntervalReminders}/>)
 							}
-						</Row>
-					</StyledContainer>
-					<StyledContainer>
-						<Row>
-							<Label htmlFor="note">Global interval reminder</Label>
-							<QuantityButton onClick={this.addGlobalIntervalReminder}>+</QuantityButton>
+						</StyledContainer>
+					}
+					<Row>
+						<Label htmlFor="note">Global interval reminder</Label>
+						<QuantityButton disabled={state !== 'EDIT'} onClick={this.addGlobalIntervalReminder}>+</QuantityButton>
+					</Row>
+					{
+						globalIntervalReminders.length  > 0  &&
+						<StyledContainer>
 							{
-								globalIntervalReminders.map((item, index) => <ReminderItem type="interval" {...item} voices={voices} key={String(Math.random() + index)} removeItem={this.removeGlobalIntervalReminder} update={this.updateGlobalIntervalReminder} />)
+								globalIntervalReminders.map((item, index) => <ReminderItem disabled={state !== 'EDIT'} type="interval" {...item} voices={voices} key={String(Math.random() + index)} removeItem={this.removeGlobalIntervalReminder} update={this.updateGlobalIntervalReminder} />)
 							}
-						</Row>
-					</StyledContainer>
-					<StyledContainer>
-						<Row>
-							<Label htmlFor="note">Single reminder</Label>
-							<QuantityButton onClick={this.addSingleReminder}>+</QuantityButton>
+						</StyledContainer>
+					}
+					<Row>
+						<Label htmlFor="note">Single reminder</Label>
+						<QuantityButton onClick={this.addSingleReminder} disabled={state !== 'EDIT'}>+</QuantityButton>
+					</Row>
+					{
+						StyledContainer.length > 0  &&
+						<StyledContainer>
 							{
-								reminders.map((item, index) => <ReminderItem type="single" {...item} voices={voices} key={String(Math.random() + index)} removeItem={this.removeSingleReminder} update={this.updateSingleReminder}/>)
+								reminders.map((item, index) => <ReminderItem disabled={state !== 'EDIT'} type="single" {...item} voices={voices} key={String(Math.random() + index)} removeItem={this.removeSingleReminder} update={this.updateSingleReminder}/>)
 							}
-						</Row>
-					</StyledContainer>
+						</StyledContainer>
+					}
           <ActionRow>
-            <Button red={false}>Save</Button>
+            <Button red={false}>{state === 'EDIT' ? 'Save' : 'Edit' }</Button>
           </ActionRow>
         </form>
       </>

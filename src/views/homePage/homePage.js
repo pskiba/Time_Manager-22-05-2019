@@ -56,7 +56,7 @@ const HomePage = ({modalStatus, setModalStatusAct, loginStatus, toolTipSettings}
   };
 
   const editReminder = () => {
-    setModalStatusAct({type: 'REMINDER', action: 'EDIT'});
+    setModalStatusAct({type: 'REMINDER', action: 'DISPLAY'});
   };
 
   return (

@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from "styled-components";
+import styled, {css} from "styled-components";
 
 const QuantityButton = styled.div`
   display: inline-block;
@@ -17,6 +17,12 @@ const QuantityButton = styled.div`
   &:hover {
     background: ${({theme}) => theme.color.black};
   }
+  ${({disabled}) => disabled && css`
+		cursor: no-drop;
+		pointer-events: none;
+		background: ${({theme}) => theme.color.lightGray};
+		border: 1px solid ${({theme}) => theme.color.darkgray};
+	`}
 `;
 
 export default QuantityButton;

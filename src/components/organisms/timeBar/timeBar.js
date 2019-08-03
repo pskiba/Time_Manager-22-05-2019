@@ -7,6 +7,7 @@ import Quarter from '../../molecules/quarter/quarter';
 import { connect } from 'react-redux';
 import ModuleName from '../../atoms/moduleName/moduleName';
 import WatchTip from '../../molecules/watchTip/watchTip';
+import Marker from '../../molecules/marker/marker';
 
 import updateDatesDeepAct from '../../../_redux/actions/updateDatesDeepAct';
 import updateDatesAct from '../../../_redux/actions/updateDatesAct';
@@ -56,12 +57,20 @@ const StyledSlider = styled.div`
 `;
 
 class TimeBar extends React.Component {
-
+	
   state = {
     hoursContainerPosition: -7,
 		newDateWasCreate: false,
 		newDateShouldBeSaved: false
   };
+	
+	shouldComponentUpdate(nextProps, nextState) {
+		const {type, currentDateObj} = this.props;
+
+		return !currentDateObj
+						|| (currentDateObj && JSON.stringify(currentDateObj[type]) !== JSON.stringify(nextProps.currentDateObj[type])
+						|| this.state.hoursContainerPosition !== nextState.hoursContainerPosition)
+	}
 
   getQuarter = (_id) => {
     const {tasks} = this.props;
@@ -71,9 +80,8 @@ class TimeBar extends React.Component {
   };
 
   getQuarters = () => {
-    const {type, currentDate, dates} = this.props;
-    const dateItem = dates.find((item) => item.date === currentDate);
-    const quartersPositions = dateItem ? dateItem[type] : null;
+    const {type, currentDateObj} = this.props;
+    const quartersPositions = currentDateObj ? currentDateObj[type] : null;
     let quarters = [];
     for(let i = 0; i < 96; i++) {
       if(quartersPositions && quartersPositions[i]) {
@@ -97,48 +105,16 @@ class TimeBar extends React.Component {
     }
     return false;
   };
-
-  updateQuarters = (quarter) => {
-    const {currentTaskId, type, dates, updateDatesAct, currentDate} = this.props;
-    let data = {};
-
-    if(!currentTaskId) return;
-
-    if(this.isToLateOrToEarly(type, quarter.position, currentDate)) return;
-
-    let dateItem = dates.find((item) => item.date === currentDate);
-    
-    if(!dateItem) {
-      data.dateItem = { 'date': currentDate, 'done': {}, 'toDo': {}, 'note': '', 'intervalReminders': [], 'reminders': []};
-      data.isNew = true;
-			this.setState({
-				newDateWasCreate: true
-			});
-    } else {
-      data.dateItem = dateItem;
-    }
-
-    if(currentTaskId === quarter._id) {
-      delete data.dateItem[type][quarter.position];
-    } else {
-      data.dateItem[type] = !data.dateItem[type] ? {} : data.dateItem[type];
-      data.dateItem[type][quarter.position] = currentTaskId;
-    }
-		this.setState({
-			newDateShouldBeSaved: true
-		});
-    updateDatesAct(data);
-  };
   
   handleOut = (e) => {
   
-		const {dates, updateDatesDeepAct, currentDate} = this.props;
+		const {updateDatesDeepAct, currentDateObj} = this.props;
 		const {newDateWasCreate, newDateShouldBeSaved} = this.state;
 		let data = {};
 	
 		if(!newDateShouldBeSaved) return;
 		
-		let dateItem = dates.find((item) => item.date === currentDate);
+		let dateItem = currentDateObj;
 		
 		if(dateItem) {
 			data.isNew = newDateWasCreate;
@@ -161,21 +137,59 @@ class TimeBar extends React.Component {
       });
     }
   };
+	
+	updateQuarters = (pStart, pEnd) => {
+		const {currentTaskId, type, updateDatesAct, currentDate, currentDateObj} = this.props;
+		let data = {};
+		
+		if(!currentTaskId) return;
+		
+		if(this.isToLateOrToEarly(type, pStart, currentDate)) return;
+		
+		let dateItem = {...currentDateObj};
+		
+		if(!dateItem) {
+			data.dateItem = { 'date': currentDate, 'done': {}, 'toDo': {}, 'note': '', 'intervalReminders': [], 'reminders': []};
+			data.isNew = true;
+			this.setState({
+				newDateWasCreate: true
+			});
+		} else {
+			data.dateItem = dateItem;
+		}
+		data.dateItem[type] = {...data.dateItem[type]};
+		
+		for(let i = pStart; i <= pEnd; i++) {
+			if(data.dateItem[type][i] === currentTaskId) {
+				delete data.dateItem[type][i]
+			} else {
+				data.dateItem[type][i] = currentTaskId;
+			}
+		}
+
+		this.setState({
+			newDateShouldBeSaved: true
+		});
+		updateDatesAct(data);
+	};
 
   render() {
+  	console.log('render');
     const {type, actualDate, currentDate, minute} = this.props;
     const quarters = this.getQuarters();
-    return (
+	
+		return (
       <StyledWrapper onMouseLeave={this.handleOut} onMouseMove={(e) => e.preventDefault()}>
         <StyledTimeBarType>{TYPE_KEYS[type]}</StyledTimeBarType>
         <StyledInnerWrapper>
           <SlideButton left={true} callBack={this.changeSliderPosition}/>
           <StyledSliderWrapper>
             <StyledSlider positionX={this.state.hoursContainerPosition}>
+							<Marker updateQuarters={this.updateQuarters}/>
               {(type === 'toDo' && actualDate === currentDate) && <WatchTip minute={minute}/>}
               {HOURS.map((item) => <Hour key={item}>{item}</Hour>)}
-              {quarters.map((item, index) => <Quarter type="transparent" key={index} position={index} _id={item._id} title={item.name} description={item.description} color={item.color} updateQuarters={this.updateQuarters} />)}
-              {quarters.map((item, index) => <Quarter type="color" key={index} position={index} _id={item._id} title={item.name} description={item.description} color={item.color} />)}
+              {quarters.map((item, index) => <Quarter type="transparent" key={index} position={index} title={item.name} description={item.description} color={item.color}  />)}
+              {quarters.map((item, index) => <Quarter type="color" key={index} position={index} title={item.name} description={item.description} color={item.color} />)}
             </StyledSlider>
           </StyledSliderWrapper>
           <SlideButton left={false} callBack={this.changeSliderPosition}/>
@@ -191,6 +205,7 @@ const mapStateToProps = (state) => {
     dates: state.dates,
     currentTaskId: state.currentTaskId,
     currentDate: state.currentDate,
+		currentDateObj: state.currentDateObj,
     actualDate: state.actualDate,
     minute: state.minute
   }

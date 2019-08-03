@@ -90,14 +90,14 @@ class ReminderItem extends React.Component {
 	};
 	
 	render() {
-		const {type, id, voices, removeItem} = this.props;
+		const {type, id, voices, removeItem, disabled} = this.props;
 		const {tStart, gap, voice, repeat, hour, minute, message} = this.state;
 		return (
 			<StyledWrapper>
 				<Row>
 					<StyledItem>
 						<StyledLabel htmlFor={'voice' + id}>Voice</StyledLabel>
-						<Select name="voice" id={'voice' + id} onChange={this.handleChange}>
+						<Select disabled={disabled} name="voice" id={'voice' + id} onChange={this.handleChange}>
 							{
 								voices.map((item, index) => {
 									return (
@@ -112,11 +112,11 @@ class ReminderItem extends React.Component {
 						<>
 							<StyledItem min="true">
 								<StyledLabel htmlFor={'tStart' + id}>T. Start</StyledLabel>
-								<StyledInput name="tStart" defaultValue={tStart} type="number" min="0" max="1440" id={'tStart' + id} onChange={this.handleChange}/>
+								<StyledInput disabled={disabled} name="tStart" defaultValue={tStart} type="number" min="0" max="1440" id={'tStart' + id} onChange={this.handleChange}/>
 							</StyledItem>
 							< StyledItem min="true">
 								<StyledLabel htmlFor={'interval' + id}>Gap</StyledLabel>
-								<StyledInput name="gap" defaultValue={gap} type="number" min="1" max="1440" id={'interval' + id} onChange={this.handleChange} />
+								<StyledInput disabled={disabled} name="gap" defaultValue={gap} type="number" min="1" max="1440" id={'interval' + id} onChange={this.handleChange} />
 							</StyledItem>
 						</>
 					}
@@ -125,30 +125,30 @@ class ReminderItem extends React.Component {
 						<>
 							<StyledItem>
 								<StyledLabel htmlFor={'hour' + id}>Hour</StyledLabel>
-								<StyledInput name="hour" defaultValue={hour} type="number" min="0" max="23" id={'hour' + id} onChange={this.handleChange}/>
+								<StyledInput disabled={disabled} name="hour" defaultValue={hour} type="number" min="0" max="23" id={'hour' + id} onChange={this.handleChange}/>
 							</StyledItem>
 							< StyledItem>
 								<StyledLabel htmlFor={'minute' + id}>Minute</StyledLabel>
-								<StyledInput name="minute" defaultValue={minute} type="number" min="0" max="59" id={'minute' + id} onChange={this.handleChange} />
+								<StyledInput disabled={disabled} name="minute" defaultValue={minute} type="number" min="0" max="59" id={'minute' + id} onChange={this.handleChange} />
 							</StyledItem>
 						</>
 					}
 					<StyledItem>
 						<StyledLabel htmlFor={'repetition' + id}>Rep.</StyledLabel>
-						<StyledInputRep name="repeat" defaultValue={repeat} type="number" min="1" max="20" id={'repetition' + id} onChange={this.handleChange} />
+						<StyledInputRep disabled={disabled} name="repeat" defaultValue={repeat} type="number" min="1" max="20" id={'repetition' + id} onChange={this.handleChange} />
 					</StyledItem>
 					<StyledItem>
 						<StyledLabel htmlFor={'message' + id}>Message</StyledLabel>
-						<StyledInputMessage name="message" id={'message' + id} type="text" small={true} defaultValue={message} onChange={this.handleChange} />
+						<StyledInputMessage disabled={disabled} name="message" id={'message' + id} type="text" small={true} defaultValue={message} onChange={this.handleChange} />
 					</StyledItem>
 					<StyledItem>
-						<QuantityButton onClick={this.play}>&#9835;</QuantityButton>
+						<QuantityButton disabled={disabled} onClick={this.play}>&#9835;</QuantityButton>
 					</StyledItem>
 					<StyledItem>
-						<QuantityButton onClick={this.update}>&#10003;</QuantityButton>
+						<QuantityButton disabled={disabled} onClick={this.update}>&#10003;</QuantityButton>
 					</StyledItem>
 					<StyledItem>
-						<QuantityButton onClick={() => removeItem(id)}>-</QuantityButton>
+						<QuantityButton disabled={disabled} onClick={() => removeItem(id)}>-</QuantityButton>
 					</StyledItem>
 				</Row>
 			</StyledWrapper>

@@ -3,24 +3,17 @@
   <component name="ChangeListManager">
     <list default="true" id="ef7873d9-167e-42c5-b99d-b5e75f45b143" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/api/routers/userRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/api/routers/userRouter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/_redux/actions/updateDatesAct.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/_redux/actions/updateDatesAct.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/_redux/actions/updateDatesDeepAct.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/_redux/actions/updateDatesDeepAct.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/_redux/reducers/rootReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/_redux/reducers/rootReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/atoms/buttons/functionButton.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/atoms/buttons/functionButton.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/atoms/colorSampler/colorSampler.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/atoms/colorSampler/colorSampler.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/atoms/dateDisplay/dateDisplay.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/atoms/dateDisplay/dateDisplay.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/molecules/loading/loading.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/loading/loading.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/molecules/placeholder/placeholder.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/tooltipContainer/tooltipContainer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/atoms/buttons/quantityButton.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/atoms/buttons/quantityButton.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/molecules/quarter/quarter.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/quarter/quarter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/molecules/taskItem/taskItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/taskItem/taskItem.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/molecules/toolTip/toolTip.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/toolTip/toolTip.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/organisms/calendar/calendar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/organisms/calendar/calendar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/organisms/dateBar/dateBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/organisms/dateBar/dateBar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/organisms/modal/modal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/organisms/modal/modal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/organisms/tasksSelector/tasksSelector.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/organisms/tasksSelector/tasksSelector.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/molecules/tooltipContainer/tooltipContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/tooltipContainer/tooltipContainer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/organisms/legend/legend.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/organisms/legend/legend.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/organisms/reminder/reminder.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/organisms/reminder/reminder.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/organisms/reminderItem/reminderItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/organisms/reminderItem/reminderItem.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/organisms/timeBar/timeBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/organisms/timeBar/timeBar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/templates/mainTemplate/mainTemplate.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/mainTemplate/mainTemplate.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/theme/globalStyle.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/theme/globalStyle.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/theme/mainTheme.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/theme/mainTheme.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/homePage/homePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/homePage/homePage.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -36,10 +29,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/organisms/timeBar/timeBar.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1958">
-              <caret line="176" column="198" selection-start-line="176" selection-start-column="198" selection-end-line="176" selection-end-column="198" />
-              <caret line="176" column="219" selection-start-line="176" selection-start-column="219" selection-end-line="176" selection-end-column="219" />
-              <caret line="100" column="15" selection-start-line="100" selection-start-column="15" selection-end-line="100" selection-end-column="15" />
+            <state relative-caret-position="2310">
+              <caret line="168" lean-forward="true" selection-start-line="168" selection-end-line="168" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -48,49 +39,25 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/molecules/quarter/quarter.js">
+        <entry file="file://$PROJECT_DIR$/src/components/molecules/tooltipContainer/tooltipContainer.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="616">
-              <caret line="31" column="30" selection-start-line="31" selection-start-column="30" selection-end-line="31" selection-end-column="30" />
+            <state relative-caret-position="418">
+              <caret line="19" column="12" lean-forward="true" selection-start-line="19" selection-start-column="12" selection-end-line="19" selection-end-column="12" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backend/api/routers/userRouter.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1144">
-              <caret line="52" column="26" selection-start-line="52" selection-start-column="26" selection-end-line="52" selection-end-column="26" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/_redux/actions/updateDatesAct.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="44" selection-start-column="44" selection-end-column="44" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/_redux/reducers/rootReducer.js">
+        <entry file="file://$PROJECT_DIR$/src/components/molecules/marker/marker.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
-              <caret line="18" column="13" lean-forward="true" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/_redux/actions/updateDatesDeepAct.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="17" column="58" selection-start-line="17" selection-start-column="58" selection-end-line="17" selection-end-column="58" />
+            <state relative-caret-position="986">
+              <caret line="54" lean-forward="true" selection-start-line="54" selection-end-line="54" />
+              <folding>
+                <element signature="e#0#51#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -136,6 +103,7 @@
       <find>update_global_interval</find>
       <find>key</find>
       <find>modal</find>
+      <find>mo</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -144,16 +112,10 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/components/atoms/label/label.js" />
-        <option value="$PROJECT_DIR$/src/components/atoms/row/row.js" />
-        <option value="$PROJECT_DIR$/src/components/atoms/actionSection/actionSection.js" />
-        <option value="$PROJECT_DIR$/src/components/atoms/buttons/quantityButton.js" />
-        <option value="$PROJECT_DIR$/src/components/atoms/actionRow/actionRow.js" />
         <option value="$PROJECT_DIR$/src/components/atoms/buttons/button.stories.js" />
         <option value="$PROJECT_DIR$/src/components/atoms/textArea/textArea.js" />
         <option value="$PROJECT_DIR$/src/components/organisms/note/note.js" />
         <option value="$PROJECT_DIR$/src/components/molecules/watchTip/watchTip.js" />
-        <option value="$PROJECT_DIR$/src/components/organisms/legend/legend.js" />
         <option value="$PROJECT_DIR$/src/templates/authTemplate/authTemplate.js" />
         <option value="$PROJECT_DIR$/src/views/registrationPage/registrationPage.js" />
         <option value="$PROJECT_DIR$/src/views/logInPage/logInPage.js" />
@@ -168,16 +130,11 @@
         <option value="$PROJECT_DIR$/src/components/molecules/speaker/speaker.js" />
         <option value="$PROJECT_DIR$/backend/mongoDB/userModel.js" />
         <option value="$PROJECT_DIR$/src/_redux/actions/setGlobalReminder.js" />
-        <option value="$PROJECT_DIR$/src/components/organisms/reminder/reminder.js" />
         <option value="$PROJECT_DIR$/src/components/atoms/timeManager/timeManager.js" />
-        <option value="$PROJECT_DIR$/src/components/organisms/reminderItem/reminderItem.js" />
         <option value="$PROJECT_DIR$/src/components/molecules/hoc/hoc.js" />
         <option value="$PROJECT_DIR$/src/_redux/actions/setToolTip.js" />
-        <option value="$PROJECT_DIR$/src/views/homePage/homePage.js" />
-        <option value="$PROJECT_DIR$/src/theme/mainTheme.js" />
         <option value="$PROJECT_DIR$/src/components/molecules/placeholder/placeholder.js" />
         <option value="$PROJECT_DIR$/src/components/atoms/dateDisplay/dateDisplay.js" />
-        <option value="$PROJECT_DIR$/src/components/atoms/buttons/functionButton.js" />
         <option value="$PROJECT_DIR$/src/components/atoms/colorSampler/colorSampler.js" />
         <option value="$PROJECT_DIR$/src/components/molecules/taskItem/taskItem.js" />
         <option value="$PROJECT_DIR$/src/components/molecules/toolTip/toolTip.js" />
@@ -190,11 +147,22 @@
         <option value="$PROJECT_DIR$/backend/api/routers/userRouter.js" />
         <option value="$PROJECT_DIR$/src/_redux/actions/updateDatesAct.js" />
         <option value="$PROJECT_DIR$/src/components/organisms/dateBar/dateBar.js" />
-        <option value="$PROJECT_DIR$/src/components/molecules/tooltipContainer/tooltipContainer.js" />
-        <option value="$PROJECT_DIR$/src/_redux/actions/updateDatesDeepAct.js" />
+        <option value="$PROJECT_DIR$/src/theme/mainTheme.js" />
+        <option value="$PROJECT_DIR$/src/components/atoms/buttons/quantityButton.js" />
+        <option value="$PROJECT_DIR$/src/views/homePage/homePage.js" />
+        <option value="$PROJECT_DIR$/src/components/organisms/reminderItem/reminderItem.js" />
+        <option value="$PROJECT_DIR$/src/components/organisms/reminder/reminder.js" />
+        <option value="$PROJECT_DIR$/src/components/molecules/slider/slider.js" />
+        <option value="$PROJECT_DIR$/src/components/molecules/marcer/marcer.js" />
+        <option value="$PROJECT_DIR$/src/components/atoms/buttons/functionButton.js" />
+        <option value="$PROJECT_DIR$/src/components/molecules/hour/hour.js" />
+        <option value="$PROJECT_DIR$/src/components/organisms/legend/legend.js" />
         <option value="$PROJECT_DIR$/src/components/molecules/quarter/quarter.js" />
-        <option value="$PROJECT_DIR$/src/components/organisms/timeBar/timeBar.js" />
         <option value="$PROJECT_DIR$/src/_redux/reducers/rootReducer.js" />
+        <option value="$PROJECT_DIR$/src/_redux/actions/updateDatesDeepAct.js" />
+        <option value="$PROJECT_DIR$/src/components/organisms/timeBar/timeBar.js" />
+        <option value="$PROJECT_DIR$/src/components/molecules/tooltipContainer/tooltipContainer.js" />
+        <option value="$PROJECT_DIR$/src/components/molecules/marker/marker.js" />
       </list>
     </option>
   </component>
@@ -206,10 +174,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-1928" />
-    <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="x" value="-1908" />
+    <option name="y" value="150" />
+    <option name="width" value="1440" />
+    <option name="height" value="780" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -217,6 +185,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -227,24 +196,6 @@
             <path>
               <item name="react-22-05-2019" type="b2602c69:ProjectViewProjectNode" />
               <item name="react-22-05-2019" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="react-22-05-2019" type="b2602c69:ProjectViewProjectNode" />
-              <item name="react-22-05-2019" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="react-22-05-2019" type="b2602c69:ProjectViewProjectNode" />
-              <item name="react-22-05-2019" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-              <item name="routers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="react-22-05-2019" type="b2602c69:ProjectViewProjectNode" />
-              <item name="react-22-05-2019" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -258,20 +209,13 @@
               <item name="react-22-05-2019" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="_redux" type="462c0819:PsiDirectoryNode" />
-              <item name="reducers" type="462c0819:PsiDirectoryNode" />
+              <item name="actions" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="react-22-05-2019" type="b2602c69:ProjectViewProjectNode" />
               <item name="react-22-05-2019" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="react-22-05-2019" type="b2602c69:ProjectViewProjectNode" />
-              <item name="react-22-05-2019" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="atoms" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="react-22-05-2019" type="b2602c69:ProjectViewProjectNode" />
@@ -279,14 +223,6 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
               <item name="molecules" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="react-22-05-2019" type="b2602c69:ProjectViewProjectNode" />
-              <item name="react-22-05-2019" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="molecules" type="462c0819:PsiDirectoryNode" />
-              <item name="quarter" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="react-22-05-2019" type="b2602c69:ProjectViewProjectNode" />
@@ -296,72 +232,17 @@
               <item name="molecules" type="462c0819:PsiDirectoryNode" />
               <item name="tooltipContainer" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="react-22-05-2019" type="b2602c69:ProjectViewProjectNode" />
-              <item name="react-22-05-2019" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="organisms" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="react-22-05-2019" type="b2602c69:ProjectViewProjectNode" />
-              <item name="react-22-05-2019" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="organisms" type="462c0819:PsiDirectoryNode" />
-              <item name="dateBar" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="react-22-05-2019" type="b2602c69:ProjectViewProjectNode" />
-              <item name="react-22-05-2019" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="react-22-05-2019" type="b2602c69:ProjectViewProjectNode" />
-              <item name="react-22-05-2019" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="mainTemplate" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="react-22-05-2019" type="b2602c69:ProjectViewProjectNode" />
-              <item name="react-22-05-2019" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="theme" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="react-22-05-2019" type="b2602c69:ProjectViewProjectNode" />
-              <item name="react-22-05-2019" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="react-22-05-2019" type="b2602c69:ProjectViewProjectNode" />
-              <item name="react-22-05-2019" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="homePage" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="react-22-05-2019" type="b2602c69:ProjectViewProjectNode" />
-              <item name="react-22-05-2019" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="root" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="D:/us_project/thehartford.com" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.standard" value="project" />
@@ -462,18 +343,24 @@
       <workItem from="1563446057542" duration="16694000" />
       <workItem from="1563519528101" duration="1841000" />
       <workItem from="1563606768055" duration="7981000" />
-      <workItem from="1563710553803" duration="652000" />
+      <workItem from="1563710553803" duration="3504000" />
+      <workItem from="1563804834852" duration="6440000" />
+      <workItem from="1564482949271" duration="1613000" />
+      <workItem from="1564485399660" duration="2542000" />
+      <workItem from="1564570001515" duration="15739000" />
+      <workItem from="1564661667573" duration="15454000" />
+      <workItem from="1564743159751" duration="19825000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="517699000" />
+    <option name="totallyTimeSpent" value="582164000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1928" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21160042" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23093449" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -487,35 +374,17 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.17265354" />
+      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.17265354" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Oracle Maxymiser" order="3" visible="true" weight="0.14661655" />
+      <window_info anchor="right" id="Oracle Maxymiser" order="3" visible="true" weight="0.0698174" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/components/atoms/moduleName/moduleName.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/atoms/paragraph/paragraph.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/atoms/row/row.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="154">
@@ -535,30 +404,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/molecules/hour/hour.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-92">
-          <caret line="21" column="14" selection-start-line="21" selection-start-column="6" selection-end-line="21" selection-end-column="14" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/atoms/textArea/textArea.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-21">
           <caret line="7" column="24" selection-start-line="7" selection-start-column="24" selection-end-line="7" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/organisms/legend/legend.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-21">
-          <caret line="60" column="23" selection-start-line="60" selection-start-column="23" selection-end-line="60" selection-end-column="23" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -663,16 +512,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/atoms/buttons/button.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/_redux/actions/setGlobalReminder.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="308">
@@ -704,16 +543,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/organisms/reminder/reminder.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1800">
-          <caret line="84" column="81" selection-start-line="84" selection-start-column="81" selection-end-line="84" selection-end-column="81" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/views/root/root.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="172">
@@ -734,33 +563,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/organisms/reminderItem/reminderItem.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="111" column="6" selection-start-line="111" selection-start-column="6" selection-end-line="111" selection-end-column="6" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/homePage/homePage.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="43" column="79" selection-start-line="43" selection-start-column="79" selection-end-line="43" selection-end-column="79" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/theme/mainTheme.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="25" column="12" selection-start-line="25" selection-end-line="25" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/_redux/actions/setToolTipAct.js">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -772,16 +574,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="44">
           <caret line="2" selection-start-line="2" selection-end-line="2" selection-end-column="81" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/atoms/buttons/functionButton.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="19" column="49" lean-forward="true" selection-start-line="19" selection-start-column="49" selection-end-line="19" selection-end-column="49" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -865,30 +657,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/organisms/modal/modal.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="23" column="2" selection-start-line="23" selection-start-column="2" selection-end-line="24" selection-end-column="27" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/organisms/calendar/calendar.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="308">
           <caret line="14" column="27" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="27" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/organisms/tasksSelector/tasksSelector.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="21" column="24" lean-forward="true" selection-start-line="21" selection-start-column="24" selection-end-line="21" selection-end-column="24" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
@@ -905,32 +677,64 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/molecules/tooltipContainer/tooltipContainer.js">
+    <entry file="file://$PROJECT_DIR$/src/components/organisms/tasksSelector/tasksSelector.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="21" column="9" lean-forward="true" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="9" />
+        <state relative-caret-position="330">
+          <caret line="21" column="24" selection-start-line="21" selection-start-column="24" selection-end-line="21" selection-end-column="24" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/organisms/timeBar/timeBar.js">
+    <entry file="file://$PROJECT_DIR$/src/_redux/actions/updateDatesAct.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1958">
-          <caret line="176" column="198" selection-start-line="176" selection-start-column="198" selection-end-line="176" selection-end-column="198" />
-          <caret line="176" column="219" selection-start-line="176" selection-start-column="219" selection-end-line="176" selection-end-column="219" />
-          <caret line="100" column="15" selection-start-line="100" selection-start-column="15" selection-end-line="100" selection-end-column="15" />
+        <state>
+          <caret column="44" selection-start-column="44" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/theme/mainTheme.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/organisms/reminderItem/reminderItem.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3168">
+          <caret line="150" column="47" selection-start-line="150" selection-start-column="47" selection-end-line="150" selection-end-column="47" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/molecules/quarter/quarter.js">
+    <entry file="file://$PROJECT_DIR$/src/components/atoms/buttons/button.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="616">
-          <caret line="31" column="30" selection-start-line="31" selection-start-column="30" selection-end-line="31" selection-end-column="30" />
+        <state relative-caret-position="176">
+          <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/atoms/buttons/quantityButton.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="19" column="14" selection-start-line="19" selection-start-column="6" selection-end-line="19" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/organisms/modal/modal.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="23" column="2" selection-start-line="23" selection-start-column="2" selection-end-line="24" selection-end-column="27" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
@@ -944,24 +748,107 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/_redux/actions/updateDatesAct.js">
+    <entry file="file://$PROJECT_DIR$/src/views/homePage/homePage.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="44" selection-start-column="44" selection-end-column="44" />
+        <state relative-caret-position="603">
+          <caret line="88" column="10" selection-start-line="88" selection-end-line="89" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/_redux/actions/updateDatesDeepAct.js">
+    <entry file="file://$PROJECT_DIR$/src/components/organisms/reminder/reminder.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="17" column="58" selection-start-line="17" selection-start-column="58" selection-end-line="17" selection-end-column="58" />
+        <state relative-caret-position="22">
+          <caret line="130" column="4" selection-start-line="130" selection-start-column="4" selection-end-line="130" selection-end-column="4" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/molecules/hour/hour.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-330">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/atoms/buttons/functionButton.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="49" column="29" selection-start-line="49" selection-start-column="29" selection-end-line="49" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/organisms/legend/legend.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="660">
+          <caret line="38" column="14" lean-forward="true" selection-start-line="38" selection-start-column="14" selection-end-line="38" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/_redux/reducers/rootReducer.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="18" column="13" lean-forward="true" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+        <state relative-caret-position="572">
+          <caret line="188" column="47" lean-forward="true" selection-start-line="188" selection-start-column="47" selection-end-line="188" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/_redux/actions/updateDatesDeepAct.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="44">
+          <caret line="2" column="56" selection-start-line="2" selection-start-column="56" selection-end-line="2" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/molecules/quarter/quarter.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="28" column="27" selection-start-line="28" selection-start-column="27" selection-end-line="28" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/organisms/timeBar/timeBar.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2310">
+          <caret line="168" lean-forward="true" selection-start-line="168" selection-end-line="168" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/molecules/tooltipContainer/tooltipContainer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="19" column="12" lean-forward="true" selection-start-line="19" selection-start-column="12" selection-end-line="19" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/molecules/marker/marker.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="986">
+          <caret line="54" lean-forward="true" selection-start-line="54" selection-end-line="54" />
+          <folding>
+            <element signature="e#0#51#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

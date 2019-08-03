@@ -27,7 +27,8 @@ const initState = {
 	}
 };
 
-const rootReducer = (state = initState, action) => {
+const rootReducer = (state = {...initState}, action) => {
+	// console.log(action.type);
   switch(action.type) {
 		case 'SET_TOOL_TIP' :
 			return {
@@ -69,10 +70,11 @@ const rootReducer = (state = initState, action) => {
 		case 'DOWNLOAD_DATA':
       return {
         ...state,
-        tasks: action.payload.tasks ? action.payload.tasks : [],
-        dates: action.payload.dates ? action.payload.dates : [],
+        tasks: action.payload.tasks ? [...action.payload.tasks] : [],
+        dates: action.payload.dates ? [...action.payload.dates] : [],
         email: action.payload.email,
-				globalIntervalReminders: action.payload.globalIntervalReminders ? action.payload.globalIntervalReminders : [],
+				globalIntervalReminders: action.payload.globalIntervalReminders ? [...action.payload.globalIntervalReminders] : [],
+				currentDateObj: action.payload.dates ? {...action.payload.dates.find((item) => item.date === state.currentDate)} : null,
         _id: action.payload._id,
         loginStatus: 'log in',
         responseWaiting: false,
@@ -84,7 +86,7 @@ const rootReducer = (state = initState, action) => {
         issueMessage: '',
         responseWaiting: true
       };
-    case 'LOG_IN':
+		case 'LOG_IN':
       if(action.payload && action.payload.token) {
         sessionStorage.setItem('token', 'Bearer ' + action.payload.token);
         sessionStorage.setItem('userId', action.payload._id);
@@ -93,6 +95,7 @@ const rootReducer = (state = initState, action) => {
         ...state,
         tasks: action.payload.tasks ? action.payload.tasks : [],
         dates: action.payload.dates ? action.payload.dates : [],
+				currentDateObj: action.payload.dates ? {...action.payload.dates.find((item) => item.date === state.currentDate)} : null,
         email: action.payload.email,
         _id: action.payload._id,
         loginStatus: 'log in',
@@ -132,11 +135,11 @@ const rootReducer = (state = initState, action) => {
         ...state,
         issueMessage: action.payload
       };
-    case 'CHANGE_DATE':
+		case 'CHANGE_DATE':
       return {
         ...state,
         currentDate: action.payload,
-				currentDateObj: state.dates.find((item) => item.date === action.payload)
+				currentDateObj: {...state.dates.find((item) => item.date === action.payload)}
       };
     case 'EDIT_TASK':
       return {
@@ -166,10 +169,10 @@ const rootReducer = (state = initState, action) => {
 				...state,
 				responseWaiting: true
 			};
-    case 'UPDATE_TASK':
+		case 'UPDATE_TASK':
       return {
         ...state,
-        tasks: state.tasks.map((item) => action.payload._id === item._id ? action.payload : item),
+        tasks: state.tasks.map((item) => action.payload._id === item._id ? {...action.payload} : {...item}),
         editedTaskId: '',
         currentTaskId: action.payload._id,
 				responseWaiting: false
@@ -180,11 +183,12 @@ const rootReducer = (state = initState, action) => {
         responseWaiting: true
       };
     }
-    case 'UPDATE_DATES':
+		case 'UPDATE_DATES':
       return {
         ...state,
+				currentDateObj: {...action.payload.dateItem},
         dates: action.payload.isNew ? [...state.dates, action.payload.dateItem] : state.dates.map((item) => {
-          return item.date === action.payload.dateItem.date ? action.payload.dateItem : item
+          return item.date === action.payload.dateItem.date ? {...action.payload.dateItem} : {...item}
         })
       };
 		case 'UPDATE_DATES_DEEP':

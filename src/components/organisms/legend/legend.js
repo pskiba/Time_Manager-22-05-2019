@@ -8,9 +8,7 @@ import ModuleName from '../../atoms/moduleName/moduleName';
 import chooseTaskAct from '../../../_redux/actions/chooseTaskAct';
 import updateTasksAct from '../../../_redux/actions/updateTasksAct';
 
-const StyledWrapper = styled.div`
-
-`;
+const StyledWrapper = styled.div``;
 
 const StyledListWrapper = styled.div`
   border: 1px solid ${({theme}) => theme.color.black};
@@ -42,16 +40,21 @@ const Legend = ({tasks, chooseTaskAct, updateTasksAct, dates, currentDate}) => {
   };
 
   const tasksId = getSelectedTasksId();
-
   return (
-    <StyledWrapper>
-      <ModuleName>Legend</ModuleName>
-      <StyledListWrapper>
-        {
-          tasks.map((item, index) => tasksId.indexOf(item._id) > -1 && <TaskItem key={index} task={item} type="legend" selectTask={selectTask} updateTaskColor={updateTaskColor}/>)
-        }
-      </StyledListWrapper>
-    </StyledWrapper>
+  	<>
+			{
+				tasks.length > 0 &&
+				<StyledWrapper>
+					<ModuleName>Legend</ModuleName>
+					<StyledListWrapper>
+						{
+							tasks.map((item, index) => tasksId.indexOf(item._id) > -1 && <TaskItem key={index} task={item} type="legend" selectTask={selectTask} updateTaskColor={updateTaskColor}/>)
+						}
+					</StyledListWrapper>
+				</StyledWrapper>
+			}
+			
+		</>
   )
 };
 

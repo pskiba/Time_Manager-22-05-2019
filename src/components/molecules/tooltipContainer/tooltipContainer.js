@@ -7,13 +7,13 @@ const TooltipContainer = (WrappedComponent) => {
 	return (props) => {
 		const { setToolTipAct, title, description} = props;
 		const setToolTip = (e) => {
-			e.stopPropagation();
+			// e.stopPropagation();
 			const BCR = e.target.getBoundingClientRect();
 			
 			setToolTipAct({on: true, title: title, description: description, pX: (BCR.left + (BCR.width / 2)), pY: BCR.top });
 		};
 		const closeToolTip = (e) => {
-			e.stopPropagation();
+			// e.stopPropagation();
 			setToolTipAct({on: false, title: '', description: ''});
 		};
 		
@@ -21,7 +21,7 @@ const TooltipContainer = (WrappedComponent) => {
 			<>
 				{
 					props.title ?
-					<span onMouseEnter={setToolTip} onMouseLeave={closeToolTip} onClick={closeToolTip}>
+					<span onMouseEnter={setToolTip} onMouseLeave={closeToolTip} onMouseUp={closeToolTip}>
 						{WrappedComponent(props)}
 					</span> : WrappedComponent(props)
 				}

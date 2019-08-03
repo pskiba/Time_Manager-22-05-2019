@@ -23,26 +23,13 @@ const StyledWrapper = styled.div`
     div:first-child {
       display: block;
     }
-    
   }
 `;
 
-const Quarter = ({position, title, _id, color, type, updateQuarters}) => {
-	
-	const handleLeave = (e) => {
-		e.preventDefault();
-		if(e.buttons === 1) {
-			updateQuarters({_id: _id, position: position, name: title})
-		}
-	};
-	const handleClick = (e) => {
-		
-		updateQuarters({_id: _id, position: position, name: title})
-		
-	};
+const Quarter = ({position, color, type}) => {
 	
   if(type === 'transparent') {
-    return <StyledWrapper color="none" zIndex={3} position={position} onMouseLeave={handleLeave} onClick={handleClick} />
+    return <StyledWrapper color="none" zIndex={4} position={position}  />
   } else {
     return <StyledWrapper color={color} zIndex={1} position={position} />
   }
