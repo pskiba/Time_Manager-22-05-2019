@@ -12,6 +12,7 @@ import TextArea from '../../atoms/textArea/textArea';
 
 import setModalStatusAct from '../../../_redux/actions/setModalStatusAct';
 import updateDatesAct from '../../../_redux/actions/updateDatesAct';
+import updateDatesDeepAct from '../../../_redux/actions/updateDatesDeepAct';
 
 const StyledLightItalic = styled.span`
   font-weight: ${({theme}) => theme.fontWeight.light};
@@ -27,7 +28,7 @@ class Note extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const {date, currentDate, setModalStatusAct, updateDatesAct} = this.props;
+    const {date, currentDate, setModalStatusAct, updateDatesAct, updateDatesDeepAct} = this.props;
     const {note} = this.state;
     let data = {};
 
@@ -37,8 +38,8 @@ class Note extends React.Component {
     } else {
       data.dateItem = {...date, 'note': note};
     }
-
-    updateDatesAct(data);
+  	updateDatesAct(data);
+    updateDatesDeepAct(data);
     setModalStatusAct({type: 'NOTE', action: 'DISPLAY'});
   };
 
@@ -91,7 +92,8 @@ class Note extends React.Component {
 const mapDispatchToProps = (dispatch) => {
   return {
     setModalStatusAct: (status) => setModalStatusAct(dispatch, status),
-    updateDatesAct: (data) => updateDatesAct(dispatch, data)
+    updateDatesDeepAct: (data) => updateDatesDeepAct(dispatch, data),
+  	updateDatesAct: (data) => updateDatesAct(dispatch, data)
   }
 };
 

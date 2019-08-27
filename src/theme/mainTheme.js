@@ -1,3 +1,11 @@
+import checkMark from '../assets/checkmarkIcon.svg';
+import edit from '../assets/editIcon.svg';
+import trash from '../assets/trashIcon.svg';
+import notebook from '../assets/notebook.png';
+import notebookActive from '../assets/notebook-active.png';
+import reminder from '../assets/reminder.png';
+import reminderActive from '../assets/reminder-active.png';
+
 export const theme = {
   color: {
     black: '#000000',
@@ -24,5 +32,11 @@ export const theme = {
     regular: 400,
     bold: 600
   },
+	img: {
+		notebook: notebook,
+		notebookActive: notebookActive,
+		reminder: reminder,
+		reminderActive: reminderActive
+	},
 	wrapperWidth: 920
 };

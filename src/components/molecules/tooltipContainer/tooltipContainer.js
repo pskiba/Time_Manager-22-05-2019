@@ -7,13 +7,10 @@ const TooltipContainer = (WrappedComponent) => {
 	return (props) => {
 		const { setToolTipAct, title, description} = props;
 		const setToolTip = (e) => {
-			// e.stopPropagation();
 			const BCR = e.target.getBoundingClientRect();
-			
 			setToolTipAct({on: true, title: title, description: description, pX: (BCR.left + (BCR.width / 2)), pY: BCR.top });
 		};
 		const closeToolTip = (e) => {
-			// e.stopPropagation();
 			setToolTipAct({on: false, title: '', description: ''});
 		};
 		

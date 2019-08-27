@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 
@@ -31,9 +31,35 @@ const StyledButton = styled.div`
 `;
 
 const SlideButton = ({left, callBack}) => {
-  const value = left ? -1 : 1;
+	let interval = null;
+	let timer = null;
+	const value = left ? -1 : 1;
+	
+	const buttonOn = () => {
+		callBack(value);
+		timer = setTimeout(() => {
+			interval = setInterval(() => {
+				callBack(value);
+			}, 120);
+		},250);
+		
+	};
+	
+	const buttonOff = () => {
+		clearInterval(interval);
+		clearTimeout(timer);
+	};
+	
+	useEffect(() => {
+		document.addEventListener('mouseup', buttonOff);
+		return () => {
+			document.removeEventListener('mouseup', buttonOff);
+			buttonOff();
+		}
+	});
+  
   return (
-    <StyledButtonWrapper left={left} onClick={() => callBack(value)}>
+    <StyledButtonWrapper left={left} onMouseDown={buttonOn} >
       <StyledButton>
 
       </StyledButton>

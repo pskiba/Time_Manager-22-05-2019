@@ -12,6 +12,7 @@ import Note from '../../components/organisms/note/note';
 import Reminder from '../../components/organisms/reminder/reminder';
 import Legend from '../../components/organisms/legend/legend';
 import DateBar from '../../components/organisms/dateBar/dateBar';
+import Overlap from '../../components/molecules/overlap/overlap';
 
 import setModalStatusAct from '../../_redux/actions/setModalStatusAct';
 
@@ -71,9 +72,9 @@ const HomePage = ({modalStatus, setModalStatusAct, loginStatus, toolTipSettings}
 				</Modal>
       }
       <StyledTopSection>
-        <Button red={false} onClick={editNote}>Edit note</Button>
+				<Overlap type="note" callBack={editNote}/>
         <DateBar/>
-        <Button red={false} onClick={editReminder}>Edit reminder</Button>
+				<Overlap type="reminder" callBack={editReminder}/>
       </StyledTopSection>
 
       <StyledTimeBarWrapper>
@@ -95,7 +96,7 @@ const mapStateToProps = (state) => {
   return {
     modalStatus: state.modalStatus,
     loginStatus: state.loginStatus,
-		toolTipSettings: state.toolTipSettings
+		toolTipSettings: state.toolTipSettings,
   }
 };
 

@@ -26,7 +26,8 @@ const TYPE_KEYS = {
 
 const StyledWrapper = styled.div`
   width: 920px;
-  margin: 50px auto 20px;
+  margin: 0 auto 0;
+  padding: 20px 0 20px 0;
 `;
 
 const StyledTimeBarType = styled(ModuleName)`
@@ -52,7 +53,7 @@ const StyledSlider = styled.div`
   position: relative;
   width: 1440px;
   display: flex;
-  transition: transform 0.3s ease-in-out;
+  transition: transform 0.08s linear;
   transform: translateX(${({positionX}) => positionX * 60}px);
 `;
 
@@ -64,12 +65,14 @@ class TimeBar extends React.Component {
 		newDateShouldBeSaved: false
   };
 	
+	sliderNodeRef = React.createRef();
+	
 	shouldComponentUpdate(nextProps, nextState) {
-		const {type, currentDateObj} = this.props;
+		const {type, currentDateObj, tasks} = this.props;
 
 		return !currentDateObj
 						|| (currentDateObj && JSON.stringify(currentDateObj[type]) !== JSON.stringify(nextProps.currentDateObj[type])
-						|| this.state.hoursContainerPosition !== nextState.hoursContainerPosition)
+						|| JSON.stringify(tasks) !== JSON.stringify(nextProps.tasks))
 	}
 
   getQuarter = (_id) => {
@@ -135,6 +138,8 @@ class TimeBar extends React.Component {
       this.setState({
         hoursContainerPosition: newPosition
       });
+	
+			this.sliderNodeRef.current.style.transform = `translateX(${newPosition * 60}px)`;
     }
   };
 	
@@ -147,8 +152,8 @@ class TimeBar extends React.Component {
 		if(this.isToLateOrToEarly(type, pStart, currentDate)) return;
 		
 		let dateItem = {...currentDateObj};
-		
-		if(!dateItem) {
+
+		if(Object.entries(dateItem).length === 0) {
 			data.dateItem = { 'date': currentDate, 'done': {}, 'toDo': {}, 'note': '', 'intervalReminders': [], 'reminders': []};
 			data.isNew = true;
 			this.setState({
@@ -159,14 +164,14 @@ class TimeBar extends React.Component {
 		}
 		data.dateItem[type] = {...data.dateItem[type]};
 		
-		for(let i = pStart; i <= pEnd; i++) {
+		for(let i = pStart; i < pEnd; i++) {
 			if(data.dateItem[type][i] === currentTaskId) {
 				delete data.dateItem[type][i]
 			} else {
 				data.dateItem[type][i] = currentTaskId;
 			}
 		}
-
+		
 		this.setState({
 			newDateShouldBeSaved: true
 		});
@@ -175,7 +180,7 @@ class TimeBar extends React.Component {
 
   render() {
   	console.log('render');
-    const {type, actualDate, currentDate, minute} = this.props;
+    const {type, actualDate, currentDate} = this.props;
     const quarters = this.getQuarters();
 	
 		return (
@@ -184,9 +189,9 @@ class TimeBar extends React.Component {
         <StyledInnerWrapper>
           <SlideButton left={true} callBack={this.changeSliderPosition}/>
           <StyledSliderWrapper>
-            <StyledSlider positionX={this.state.hoursContainerPosition}>
+            <StyledSlider positionX={this.state.hoursContainerPosition} ref={this.sliderNodeRef}>
 							<Marker updateQuarters={this.updateQuarters}/>
-              {(type === 'toDo' && actualDate === currentDate) && <WatchTip minute={minute}/>}
+              {(type === 'toDo' && actualDate === currentDate) && <WatchTip />}
               {HOURS.map((item) => <Hour key={item}>{item}</Hour>)}
               {quarters.map((item, index) => <Quarter type="transparent" key={index} position={index} title={item.name} description={item.description} color={item.color}  />)}
               {quarters.map((item, index) => <Quarter type="color" key={index} position={index} title={item.name} description={item.description} color={item.color} />)}
@@ -206,8 +211,7 @@ const mapStateToProps = (state) => {
     currentTaskId: state.currentTaskId,
     currentDate: state.currentDate,
 		currentDateObj: state.currentDateObj,
-    actualDate: state.actualDate,
-    minute: state.minute
+    actualDate: state.actualDate
   }
 };
 

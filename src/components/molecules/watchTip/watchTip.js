@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import {connect} from 'react-redux';
 
 const StyledWrapper = styled.div`
   position: absolute;
@@ -33,4 +34,10 @@ const WatchTip = ({minute}) => {
   )
 };
 
-export default WatchTip;
+const mapStateToProps = (state) => {
+	return {
+		minute: state.minute
+	}
+};
+
+export default connect(mapStateToProps)(WatchTip);
